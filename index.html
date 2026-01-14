@@ -1,1 +1,182 @@
-<h1>hejka</h1>
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kamil</title>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&family=Gaegu&display=swap" rel="stylesheet">
+    <style>
+        /* --- STYLE CSS --- */
+        :root {
+            --bg-color: #fdf6f0;
+            --accent-1: #ffcfdf; /* pastelowy róż */
+            --accent-2: #cfedff; /* pastelowy błękit */
+            --accent-3: #e0ffcf; /* pastelowa zieleń */
+            --accent-4: #fcf4cf; /* pastelowy żółty */
+            --text-color: #5b5b5b;
+            --border-style: 2px solid #5b5b5b;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Quicksand', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            background: var(--accent-1);
+            border: var(--border-style);
+            border-radius: 20px;
+            box-shadow: 8px 8px 0px #d8b4c0;
+            margin-bottom: 40px;
+            width: 100%;
+            max-width: 800px;
+        }
+
+        h1 {
+            font-family: 'Gaegu', cursive;
+            font-size: 4rem;
+            margin: 0;
+            color: #4a4a4a;
+        }
+
+        .container {
+            max-width: 850px;
+            width: 100%;
+            display: grid;
+            gap: 30px;
+        }
+
+        section {
+            background: white;
+            padding: 25px;
+            border: var(--border-style);
+            border-radius: 15px;
+            position: relative;
+        }
+
+        /* Każda sekcja ma inny kolor cienia dla klimatu "custom" */
+        .projekty { box-shadow: 6px 6px 0px var(--accent-2); }
+        .zainteresowania { box-shadow: 6px 6px 0px var(--accent-3); }
+        .nauka { box-shadow: 6px 6px 0px var(--accent-1); }
+        .gry { box-shadow: 6px 6px 0px var(--accent-4); }
+
+        h2 {
+            font-family: 'Gaegu', cursive;
+            font-size: 2.2rem;
+            margin-top: 0;
+            border-bottom: 2px dashed #ccc;
+            padding-bottom: 10px;
+        }
+
+        .grid-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .card {
+            background: #fafafa;
+            border: 1px solid #eee;
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        .game-status {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            background: var(--accent-4);
+        }
+
+        footer {
+            margin-top: 50px;
+            text-align: center;
+            font-size: 0.9rem;
+            opacity: 0.7;
+            padding-bottom: 30px;
+        }
+
+        /* Efekt hover dla klimatu "old web" */
+        section:hover {
+            transform: translateY(-3px);
+            transition: transform 0.2s ease;
+        }
+
+        .emoji {
+            font-size: 1.5rem;
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Witaj u Kamila! <span class="emoji">✨</span></h1>
+        <p>Moja mała przestrzeń w sieci. Rozgość się! :3</p>
+    </header>
+
+    <div class="container">
+        
+        <section class="zainteresowania">
+            <h2>O mnie & Zainteresowania <span class="emoji">🌿</span></h2>
+            <p>[Tutaj wpisz swój główny opis - kim jesteś i co sprawia, że rano wstajesz z łóżka!]</p>
+            <p>[Tutaj tekst o Twoich zainteresowaniach. Może coś o zbieraniu starych aparatów, kodowaniu w nocy albo spacerach po lesie?]</p>
+        </section>
+
+        <section class="projekty">
+            <h2>Moje Projekty <span class="emoji">🛠️</span></h2>
+            <div class="grid-list">
+                <div class="card">
+                    <strong>Projekt 1</strong>
+                    <p>[Krótki opis tego, co fajnego zrobiłeś/zrobiłaś. Może link do GitHub?]</p>
+                </div>
+                <div class="card">
+                    <strong>Projekt 2</strong>
+                    <p>[Kolejna ciekawa rzecz, którą warto się pochwalić światu!]</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="nauka">
+            <h2>Aktywność Naukowa <span class="emoji">🧬</span></h2>
+            <p>[Tutaj wpisz informacje o studiach, badaniach, konferencjach lub po prostu o rzeczach, których się obecnie uczysz.]</p>
+            <ul>
+                <li>[Punkt naukowy nr 1]</li>
+                <li>[Punkt naukowy nr 2]</li>
+            </ul>
+        </section>
+
+        <section class="gry">
+            <h2>Ostatnio ograne <span class="emoji">🎮</span></h2>
+            <div class="grid-list">
+                <div class="card">
+                    <strong>Tytuł Gry 1</strong>
+                    <p>Moja ocena: 9/10</p>
+                    <span class="game-status">Ukończone</span>
+                </div>
+                <div class="card">
+                    <strong>Tytuł Gry 2</strong>
+                    <p>Fajny klimat, ale trudna!</p>
+                    <span class="game-status">W trakcie...</span>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <footer>
+        <p>Strona stworzona z pasją | 2026 | Kamil's Web Space <span class="emoji">🛸</span></p>
+    </footer>
+
+</body>
+</html>
