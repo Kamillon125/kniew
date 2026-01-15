@@ -1,185 +1,260 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="en">
 <head>
-    <link rel="icon" type="image/png" href="favicon-32x.png?v=3">
-    <link rel="apple-touch-icon" href="favicon-32x.png?v=3">
-    <link rel="mask-icon" href="favicon-32x.png?v=3" color="#ffcfdf">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kamil</title>
-    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&family=Gaegu&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="favicon-32x.png?v=3">
+    <link rel="apple-touch-icon" href="favicon-32x.png?v=3">
+    <link rel="mask-icon" href="favicon-32x.png?v=3" color="#ffcfdf">
+    
     <style>
-        /* --- STYLE CSS --- */
         :root {
-            --bg-color: #fdf6f0;
-            --accent-1: #ffcfdf; /* pastelowy róż */
-            --accent-2: #cfedff; /* pastelowy błękit */
-            --accent-3: #e0ffcf; /* pastelowa zieleń */
-            --accent-4: #fcf4cf; /* pastelowy żółty */
-            --text-color: #5b5b5b;
-            --border-style: 2px solid #5b5b5b;
+            --bg: #f7f3f2;
+            --card: #ffffff;
+            --ink: #2c2c2c;
+            --ink-light: #aaa; /* Kolor dla nieaktywnego języka */
+            --accent1: #b7d6f3;
+            --accent2: #f4c6d8;
+            --accent3: #c8e6c9;
+            --accent4: #fff0b3;
+            --accent5: #e1bee7;
+            --accent6: #ffe0b2;
         }
+
+        * { box-sizing: border-box; }
 
         body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            font-family: 'Quicksand', sans-serif;
-            line-height: 1.6;
             margin: 0;
-            padding: 20px;
+            background: var(--bg);
+            color: var(--ink);
+            font-family: system-ui, -apple-system, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+        }
+
+        /* Language Switcher */
+        .lang-switcher {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 200;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 10px 16px;
+            border-radius: 14px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            border: 1px solid rgba(0,0,0,0.05);
+            transition: all 200ms ease-out;
+            user-select: none;
+        }
+
+        /* Style dla poszczególnych stanów języka */
+        .lang-switcher .inactive {
+            color: var(--ink-light);
+        }
+
+        .lang-switcher:hover {
+            transform: scale(1.05);
+            background: white;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            gap: 1.5rem;
+            width: 90vw;
+            height: 85vh;
+        }
+
+        .widget {
+            background: var(--card);
+            border-radius: 40px;
+            padding: 3rem;
+            cursor: pointer;
             display: flex;
             flex-direction: column;
+            justify-content: flex-end;
+            transition: transform 200ms ease-out, box-shadow 200ms ease-out;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+            border: 1px solid rgba(0,0,0,0.03);
+        }
+
+        .widget:hover {
+            transform: scale(1.02);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+        }
+
+        .widget h2 { margin: 0; font-size: 2.2rem; letter-spacing: -1px; pointer-events: none; }
+        .widget p { margin: 12px 0 0 0; opacity: 0.6; font-size: 1.1rem; pointer-events: none; }
+
+        #overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.05);
+            backdrop-filter: blur(15px);
+            display: flex;
+            justify-content: center;
             align-items: center;
+            z-index: 150;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 200ms ease-out, visibility 200ms ease-out;
+            cursor: pointer;
         }
 
-        header {
-            text-align: center;
-            padding: 40px 20px;
-            background: var(--accent-1);
-            border: var(--border-style);
-            border-radius: 20px;
-            box-shadow: 8px 8px 0px #d8b4c0;
-            margin-bottom: 40px;
-            width: 100%;
-            max-width: 800px;
-        }
-
-        h1 {
-            font-family: 'Gaegu', cursive;
-            font-size: 4rem;
-            margin: 0;
-            color: #4a4a4a;
-        }
-
-        .container {
-            max-width: 850px;
-            width: 100%;
-            display: grid;
-            gap: 30px;
-        }
-
-        section {
+        #expanded-card {
+            width: 90vw;
+            height: 85vh;
             background: white;
-            padding: 25px;
-            border: var(--border-style);
-            border-radius: 15px;
-            position: relative;
+            border-radius: 50px;
+            padding: 5rem;
+            cursor: default;
+            transform: scale(0.96);
+            transition: transform 200ms ease-out;
+            box-shadow: 0 50px 100px rgba(0,0,0,0.1);
+            overflow-y: auto;
         }
 
-        /* Każda sekcja ma inny kolor cienia dla klimatu "custom" */
-        .projekty { box-shadow: 6px 6px 0px var(--accent-2); }
-        .zainteresowania { box-shadow: 6px 6px 0px var(--accent-3); }
-        .nauka { box-shadow: 6px 6px 0px var(--accent-1); }
-        .gry { box-shadow: 6px 6px 0px var(--accent-4); }
+        #overlay.active { opacity: 1; visibility: visible; }
+        #overlay.active #expanded-card { transform: scale(1); }
 
-        h2 {
-            font-family: 'Gaegu', cursive;
-            font-size: 2.2rem;
-            margin-top: 0;
-            border-bottom: 2px dashed #ccc;
-            padding-bottom: 10px;
-        }
-
-        .grid-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-        }
-
-        .card {
-            background: #fafafa;
-            border: 1px solid #eee;
-            padding: 15px;
-            border-radius: 10px;
-        }
-
-        .game-status {
-            display: inline-block;
-            padding: 2px 8px;
-            border-radius: 5px;
-            font-size: 0.8rem;
-            background: var(--accent-4);
-        }
-
-        footer {
-            margin-top: 50px;
-            text-align: center;
-            font-size: 0.9rem;
-            opacity: 0.7;
-            padding-bottom: 30px;
-        }
-
-        /* Efekt hover dla klimatu "old web" */
-        section:hover {
-            transform: translateY(-3px);
-            transition: transform 0.2s ease;
-        }
-
-        .emoji {
+        .content-body {
+            margin-top: 2.5rem;
             font-size: 1.5rem;
+            line-height: 1.6;
+            opacity: 0;
+            transition: opacity 200ms ease-out 100ms;
         }
 
+        #overlay.active .content-body { opacity: 1; }
+
+        .accent1 { background-color: var(--accent1); }
+        .accent2 { background-color: var(--accent2); }
+        .accent3 { background-color: var(--accent3); }
+        .accent4 { background-color: var(--accent4); }
+        .accent5 { background-color: var(--accent5); }
+        .accent6 { background-color: var(--accent6); }
+
+        @media (max-width: 900px) {
+            body { overflow-y: auto; height: auto; padding: 4rem 0; }
+            .grid { grid-template-columns: 1fr; grid-template-rows: auto; height: auto; }
+            .widget { min-height: 300px; }
+            #expanded-card { padding: 2rem; width: 95vw; }
+        }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>Witaj u Kamila! <span class="emoji">✨</span></h1>
-        <p>Moja mała przestrzeń w sieci. Rozgość się! :3</p>
-    </header>
+<div class="lang-switcher" id="langToggle"></div>
 
-    <div class="container">
-        
-        <section class="zainteresowania">
-            <h2>O mnie & Zainteresowania <span class="emoji">🌿</span></h2>
-            <p>[Tutaj wpisz swój główny opis - kim jesteś i co sprawia, że rano wstajesz z łóżka!]</p>
-            <p>[Tutaj tekst o Twoich zainteresowaniach. Może coś o zbieraniu starych aparatów, kodowaniu w nocy albo spacerach po lesie?]</p>
-        </section>
-
-        <section class="projekty">
-            <h2>Moje Projekty <span class="emoji">🛠️</span></h2>
-            <div class="grid-list">
-                <div class="card">
-                    <strong>Projekt 1</strong>
-                    <p>[Krótki opis tego, co fajnego zrobiłeś/zrobiłaś. Może link do GitHub?]</p>
-                </div>
-                <div class="card">
-                    <strong>Projekt 2</strong>
-                    <p>[Kolejna ciekawa rzecz, którą warto się pochwalić światu!]</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="nauka">
-            <h2>Aktywność Naukowa <span class="emoji">🧬</span></h2>
-            <p>[Tutaj wpisz informacje o studiach, badaniach, konferencjach lub po prostu o rzeczach, których się obecnie uczysz.]</p>
-            <ul>
-                <li>[Punkt naukowy nr 1]</li>
-                <li>[Punkt naukowy nr 2]</li>
-            </ul>
-        </section>
-
-        <section class="gry">
-            <h2>Ostatnio ograne <span class="emoji">🎮</span></h2>
-            <div class="grid-list">
-                <div class="card">
-                    <strong>Tytuł Gry 1</strong>
-                    <p>Moja ocena: 9/10</p>
-                    <span class="game-status">Ukończone</span>
-                </div>
-                <div class="card">
-                    <strong>Tytuł Gry 2</strong>
-                    <p>Fajny klimat, ale trudna!</p>
-                    <span class="game-status">W trakcie...</span>
-                </div>
-            </div>
-        </section>
-
+<div class="grid">
+    <div class="widget accent1" data-id="about">
+        <h2 class="txt-title"></h2>
+        <p class="txt-sub"></p>
     </div>
+    <div class="widget accent2" data-id="projects">
+        <h2 class="txt-title"></h2>
+        <p class="txt-sub"></p>
+    </div>
+    <div class="widget accent3" data-id="hobbies">
+        <h2 class="txt-title"></h2>
+        <p class="txt-sub"></p>
+    </div>
+    <div class="widget accent4" data-id="blog">
+        <h2 class="txt-title"></h2>
+        <p class="txt-sub"></p>
+    </div>
+    <div class="widget accent5" data-id="uni">
+        <h2 class="txt-title"></h2>
+        <p class="txt-sub"></p>
+    </div>
+    <div class="widget accent6" data-id="contact">
+        <h2 class="txt-title"></h2>
+        <p class="txt-sub"></p>
+    </div>
+</div>
 
-    <footer>
-        <p>Strona stworzona z pasją | 2026 | Kamil's Web Space <span class="emoji">🛸</span></p>
-    </footer>
+<div id="overlay">
+    <div id="expanded-card">
+        <h2 id="exp-title" style="font-size: 4rem; margin: 0; letter-spacing: -3px;"></h2>
+        <div id="exp-content" class="content-body"></div>
+    </div>
+</div>
+
+<script>
+    const data = {
+        en: {
+            about: { title: "About me", sub: "PLACEHOLDER 'About me' IN ENGLISH", content: "PLACEHOLDER 'About me' IN ENGLISH" },
+            projects: { title: "Projects", sub: "PLACEHOLDER 'Projects' IN ENGLISH", content: "PLACEHOLDER 'Projects' IN ENGLISH" },
+            hobbies: { title: "Hobbies", sub: "PLACEHOLDER 'Hobbies' IN ENGLISH", content: "PLACEHOLDER 'Hobbies' IN ENGLISH" },
+            blog: { title: "Blog", sub: "PLACEHOLDER 'Blog' IN ENGLISH", content: "PLACEHOLDER 'Blog' IN ENGLISH" },
+            uni: { title: "Uni stuff", sub: "PLACEHOLDER 'Uni stuff' IN ENGLISH", content: "PLACEHOLDER 'Uni stuff' IN ENGLISH" },
+            contact: { title: "Contact", sub: "PLACEHOLDER 'Contact' IN ENGLISH", content: "PLACEHOLDER 'Contact' IN ENGLISH" }
+        },
+        pl: {
+            about: { title: "O mnie", sub: "PLACEHOLDER 'O mnie' PO POLSKU", content: "PLACEHOLDER 'O mnie' PO POLSKU" },
+            projects: { title: "Projekty", sub: "PLACEHOLDER 'Projekty' PO POLSKU", content: "PLACEHOLDER 'Projekty' PO POLSKU" },
+            hobbies: { title: "Hobby", sub: "PLACEHOLDER 'Hobby' PO POLSKU", content: "PLACEHOLDER 'Hobby' PO POLSKU" },
+            blog: { title: "Blog", sub: "PLACEHOLDER 'Blog' PO POLSKU", content: "PLACEHOLDER 'Blog' PO POLSKU" },
+            uni: { title: "Studia", sub: "PLACEHOLDER 'Studia' PO POLSKU", content: "PLACEHOLDER 'Studia' PO POLSKU" },
+            contact: { title: "Kontakt", sub: "PLACEHOLDER 'Kontakt' PO POLSKU", content: "PLACEHOLDER 'Kontakt' PO POLSKU" }
+        }
+    };
+
+    let currentLang = 'en';
+
+    const overlay = document.getElementById('overlay');
+    const expTitle = document.getElementById('exp-title');
+    const expContent = document.getElementById('exp-content');
+    const expandedCard = document.getElementById('expanded-card');
+    const langToggle = document.getElementById('langToggle');
+
+    function updateLanguage() {
+        // Aktualizacja widżetów
+        document.querySelectorAll('.widget').forEach(w => {
+            const id = w.getAttribute('data-id');
+            w.querySelector('.txt-title').innerText = data[currentLang][id].title;
+            w.querySelector('.txt-sub').innerText = data[currentLang][id].sub;
+        });
+
+        // Aktualizacja switchera z kolorowaniem
+        const enClass = currentLang === 'en' ? '' : 'class="inactive"';
+        const plClass = currentLang === 'pl' ? '' : 'class="inactive"';
+        langToggle.innerHTML = `<span ${enClass}>EN</span> | <span ${plClass}>PL</span>`;
+    }
+
+    langToggle.addEventListener('click', () => {
+        currentLang = currentLang === 'en' ? 'pl' : 'en';
+        updateLanguage();
+    });
+
+    document.querySelectorAll('.widget').forEach(w => {
+        w.addEventListener('click', () => {
+            const id = w.getAttribute('data-id');
+            expTitle.innerText = data[currentLang][id].title;
+            expContent.innerHTML = data[currentLang][id].content;
+            expandedCard.style.backgroundColor = window.getComputedStyle(w).backgroundColor;
+            overlay.classList.add('active');
+        });
+    });
+
+    overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) {
+            overlay.classList.remove('active');
+        }
+    });
+
+    updateLanguage();
+</script>
 
 </body>
 </html>
