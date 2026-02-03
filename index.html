@@ -187,8 +187,8 @@
                 </div>
                 
                 <div id="music-attribution">
-                    <span class="en-text">Playing: "Zelda's Theme" by Koji Kondo from the game Ocarina of Time</span>
-                    <span class="pl-text">Teraz gra: "Zelda's Theme" twórcy Koji Kondo z gry Ocarina of Time</span>
+                    <span class="en-text">Playing: "Bolero" by Maurice Ravel performed by Lamoureux Orchestra</span>
+                    <span class="pl-text">Teraz gra: "Bolero" Maurice'a Ravela w wykonaniu Orkiestry Lamoureux</span>
                 </div>
             </div>
 
@@ -203,7 +203,7 @@
                         <span class="pl-text">Wyłącz muzykę</span>
                     </span>
                 </button>
-                <audio id="ambient-music" src="Zelda's Theme - Ocarina of Time - Koji Kondo.mp3" loop></audio>
+                <audio id="ambient-music" src="bolero.mp3" loop></audio>
 
                 <button onclick="toggleTheme()">
                     <span class="en-text">Light/Dark</span>
@@ -286,6 +286,14 @@
     </div>
 
     <script>
+        // 0. AUTO THEME DETECTION (SYSTEM PREFERENCE)
+        (function() {
+            // Check if the user's OS prefers dark mode
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                document.body.classList.add("dark-mode");
+            }
+        })();
+
         // 1. NAME PRONUNCIATION
         function playName() {
             var audio = document.getElementById("name-audio");
@@ -307,7 +315,7 @@
             }
         }
 
-        // 3. DARK MODE TOGGLE
+        // 3. DARK MODE TOGGLE (MANUAL)
         function toggleTheme() {
             document.body.classList.toggle("dark-mode");
         }
@@ -320,7 +328,7 @@
             
             if (music.paused) {
                 music.play().catch(function(error) {
-                    alert("Music file not found! Ensure filename is exactly: Zelda's Theme - Ocarina of Time - Koji Kondo.mp3");
+                    alert("Music file not found! Ensure filename is exactly: bolero.mp3");
                 });
                 attribution.style.display = "block"; 
                 // Add class to toggle text to "Turn Off"
