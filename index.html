@@ -9,174 +9,13 @@
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
     <link rel="shortcut icon" href="favicon.ico">
-    <style>
-        /* =========================================
-           CUSTOMIZATION SECTION
-           ========================================= */
-        :root {
-            /* LIGHT MODE (Default) */
-            --bg-color: #eaf0f6; 
-            --container-bg: #ffffff;
-            --text-color: #333333;
-            --accent-color: #0044cc; 
-            --subtle-text: #666666;
-            --border-color: #dddddd;
-            
-            /* Fonts */
-            --main-font: "Times New Roman", Times, serif;
-            
-            /* Spacing */
-            --content-width: 800px;
-        }
-
-        /* DARK MODE OVERRIDES */
-        body.dark-mode {
-            --bg-color: #121212; 
-            --container-bg: #1e1e1e;
-            --text-color: #e0e0e0;
-            --accent-color: #66b3ff; /* Lighter blue for better contrast on dark */
-            --subtle-text: #aaaaaa;
-            --border-color: #444444;
-        }
-
-        /* =========================================
-           CORE STYLES
-           ========================================= */
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            font-family: var(--main-font);
-            margin: 0;
-            padding: 20px;
-            line-height: 1.6;
-            transition: background-color 0.3s, color 0.3s;
-        }
-
-        .container {
-            max-width: var(--content-width);
-            margin: 0 auto;
-            background: var(--container-bg);
-            padding: 40px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            border-radius: 5px;
-            transition: background-color 0.3s;
-        }
-
-        /* Header Layout */
-        header {
-            border-bottom: 2px solid var(--border-color);
-            padding-bottom: 20px;
-            margin-bottom: 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-
-        .header-left {
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-        }
-
-        .name-wrapper {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .header-controls {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            align-items: center;
-        }
-
-        h1 {
-            margin: 0;
-            font-size: 2.5rem;
-            letter-spacing: -0.5px;
-        }
-
-        /* Buttons Styling */
-        button {
-            cursor: pointer;
-            font-family: var(--main-font);
-            background: transparent;
-            border: 1px solid var(--text-color);
-            color: var(--text-color);
-            padding: 5px 10px;
-            transition: all 0.2s;
-        }
-        
-        button:hover {
-            background-color: var(--accent-color);
-            color: var(--container-bg);
-            border-color: var(--accent-color);
-        }
-
-        /* Audio Icon Specifics */
-        .audio-btn {
-            border-radius: 50%;
-            width: 30px;
-            height: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 0;
-        }
-
-        /* Music Attribution Text */
-        #music-attribution {
-            font-size: 0.85rem;
-            color: var(--subtle-text);
-            font-style: italic;
-            margin-top: 5px;
-            display: none; 
-        }
-
-        /* Links */
-        a {
-            color: var(--accent-color);
-            text-decoration: none;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
-
-        /* Sections */
-        section { margin-bottom: 40px; }
-        h2 {
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 10px;
-            margin-top: 0;
-        }
-
-        /* Footer */
-        footer {
-            color: var(--subtle-text);
-            border-top: 1px solid var(--border-color);
-            padding-top: 10px;
-        }
-
-        /* LANGUAGE LOGIC */
-        body.lang-en-active .pl-text { display: none; }
-        body.lang-pl-active .en-text { display: none; }
-
-        /* MUSIC BUTTON STATE LOGIC */
-        /* By default, show "Turn On" and hide "Turn Off" */
-        .music-label-off { display: none; } 
-        
-        /* When button has class 'is-playing', swap them */
-        button.is-playing .music-label-on { display: none; }
-        button.is-playing .music-label-off { display: inline; }
-
-    </style>
+    
+    <link rel="stylesheet" href="styles.css">
+    <script src="dashboard_data.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body class="lang-en-active">
-
     <div class="container">
         <header>
             <div class="header-left">
@@ -218,128 +57,245 @@
         </header>
 
         <main>
-            <section id="about">
-                <h2>
-                    <span class="en-text">About Me</span>
-                    <span class="pl-text">O Mnie</span>
-                </h2>
+            <div class="tab-nav">
+                <button class="tab-btn active" onclick="switchTab('home')">
+                    <span class="en-text">Home</span>
+                    <span class="pl-text">Strona Główna</span>
+                </button>
+                <button class="tab-btn" onclick="switchTab('dashboard')">
+                    <span class="en-text">Linguistic Dashboard</span>
+                    <span class="pl-text">Panel Lingwistyczny</span>
+                </button>
+            </div>
+
+            <div id="home-tab" class="tab-content active">
+                <section id="about">
+                    <h2>
+                        <span class="en-text">About Me</span>
+                        <span class="pl-text">O Mnie</span>
+                    </h2>
+                    <div class="bio-content">
+                        <p class="en-text">
+                            Hello! I'm a 21 year old uni student, currently right at the end of my "<a href="https://sylabusy.agh.edu.pl/pl/1/2/19/1/1/0/81">social informatics</a>" undergrad program. For a loooooooooooong WHILE i've been interested in the way people interact with computers - I spent quite a bit of time in the peripheral rabbit hole, to the point where I made <a href="https://github.com/Kamillon125/bonk/blob/gh-pages/index.md">my own keyboard layout</a> (!!! it's extremely useless BUT neat!). Peripherals are not all I'm interested in though, for a while there I was really into handheld video game consoles (and how they've evolved overtime), which, once again is very useless, but also quite neat! I love linguistics, too, and specifically the part of linguistics that relates to learning languages. I know Polish, English (C2-ish?), enough Ukrainian to have read a book in the language back in 2024 (Лаовай by Kateryna Kulyk), and have been flirting with a little bit of Italian recently. I'm also on the way to publishing a scientific article on language acquisition in video games, which should be out by the end of 2026. I used to be a MASSIVE Nintendo fan (a big mistake) and have played basically every single Pokemon and Zelda game that exists. I still love these franchises, especially the atmosphere of some of these games (completely agree with <a href="https://www.youtube.com/watch?v=xI43wgrPP28">Internet Pitstop</a> on YouTube as far as atmosphere in gaming) If you want to know more about my professional work stuff, here's my <a href="https://www.linkedin.com/in/kamil-niewiarowski/">LinkedIn</a>, you won't find that type of stuff on this website.
+                        </p>
+                        <p class="pl-text">
+                            Hejka! Jestem 21-letnim studentem <a href="https://sylabusy.agh.edu.pl/pl/1/2/19/1/1/0/81">informatyki społecznej AGH</a> (chociaż już właściwie kończę 1 stopień). Od kiedy pamiętam byłem bardzo zainteresowany tym, jak ludzie wchodzą w interakcję z komputerami - mega dużo czasu spędziłem czytając o urządzeniach peryferyjnych, aż do momentu kiedy zrobiłem <a href="https://github.com/Kamillon125/bonk/blob/gh-pages/index.md">własny układ klawiatury</a> (!!! jest to bardzo bezużyteczne, ale również fajne!). Urządzenia peryferyjne to nie wszystkie rzeczy około-człowieko-komputerowe, którymi się interesowałem - przez długi czas ciekawiłem się przenośnymi konsolami (i tym, jak zmieniały się na przestrzeni czasu), co, znowu, nie jest może najbardziej użyteczne i produktywne, ale mega mnie interesowało. Innym moim zainteresowaniem jest językoznawstwo, a w szczególności ta część językoznawstwa, która odnosi się do uczenia się języków obcych. Znam polski, angielski (C2), przeczytałem po ukraińsku książkę w 2024 (Лаовай Kateryny Kulyk), a od jakiegoś czasu zacząłem powolutku pracę nad włoskim. Jeśli wszystko się uda, to do końca 2026 będę miał opublikowany artykuł naukowy o przyswajaniu języków obcych w grach wideo. Kiedyś byłem BARDZO dużym fanem Nintendo (był to błąd) i w tamtym okresie przeszedłem właściwie wszystkie Pokemony i Zeldy, jakie tylko istniały. Wciąż bardzo lubię wracać do tych gier, szczególnie ze względu na ich klimat i vibe (całkowicie zgadzam się z <a href="https://www.youtube.com/watch?v=xI43wgrPP28">Internet Pitstop</a>, jeśli chodzi o klimat w grach) Jeżeli chcesz się dowiedzieć więcej o moich rzeczach zawodowych, to tutaj jest <a href="https://www.linkedin.com/in/kamil-niewiarowski/">LinkedIn</a>, tutaj tych rzeczy nie ma.
+                        </p>
+                    </div>
+                </section>
+
+                <section id="computer-stuff">
+                    <h2>
+                        <span class="pl-text">Komputer</span>
+                        <span class="en-text">Computer stuff</span>
+                    </h2>
+                    <div class="computer">
+                        <p class="pl-text">
+                            Po wielu latach próbowania odejścia od Windowsa wreszcie mi się to (chyba) udało. Nie podoba mi się to, że MS Windows staje się po prostu coraz gorszy - szczerze nie chcę, żeby ktokolwiek wpychał mi do gardła Copilot, ani żeby mój system operacyjny korzystał z moich danych w większym stopniu, niż ja korzystam z mojego systemu operacyjnego. Wciąż mam gdzieś w komputerze system Windows, ale nie używam go właściwie nigdy (jest tylko w razie potrzeby, gdybym jakichś programów nie mógł odpalić na Linuxie). Obecnie korzystam z <a href="https://cachyos.org/">CachyOS</a> ze środowiskiem <a href="https://www.gnome.org/">Gnome</a>. Próbowałem <a href="https://system76.com/cosmic">COSMIC</a>, ale był zbyt nowy i trochę rzeczy na nim nie działało. Próbowałem również <a href="https://kde.org/">KDE</a>, który był całkiem git, ale nie podobał mi się wizualnie. Poza tym kiedyś używałem tiling window managera (<a href="https://github.com/WillPower3309/swayfx">swayfx</a>), ale szczerze nie miałem siły konfigurować dosłownie wszystkiego od podstaw, i wolałem lekko dostosować Gnome do swoich potrzeb. W sumie bardzo polecam Linuxa - zdecydowana większość rzeczy działa, nawet gry działają na karcie Nvidii (którą mam), a jeśli chodzi o gry multiplayer z antycheatem które nie działają (np Valorant), to tak właściwie to jest plus Linuxa, że nie mogę na nim grać w Valorant.
+                        </p>
+                        <p class="en-text">
+                            After many years of trying to quit Windows I think i've finally managed to do it. I really don't like how MS Windows is just getting worse and worse - like look, I really don't want Copilot being shoved down my throat, and I hate how Windows uses my personal data more than I use Windows as an OS. Like, I still have it somewhere on my PC, but that's only in case I ever come across software I NEED to open but can't on Linux, and 100% of my daily computer use is on Linux. Which, right now I'm using <a href="https://cachyos.org/">CachyOS</a> with the <a href="https://www.gnome.org/">Gnome Desktop Environment</a>. I tried <a href="https://system76.com/cosmic">COSMIC</a>, but it was waaaay too new and some things didn't work on it, and I also tried <a href="https://kde.org/">KDE</a>, which was good but honestly felt very bland and boring. Besides that, at some point in the past I tried tiling window managers (<a href="https://github.com/WillPower3309/swayfx">swayfx</a>), but like, honest to God, configuring EVERYTHING on your own and not even having a notification daemon out of the box was so annoying, that i'd rather just slightly adjust Gnome to fit my needs. I do recommend Linux - the vast majority of things "just works", even most video games work on my Nvidia GPU, and, honestly, as for the video games that don't work (such as Valorant), it's a selling point for Linux that you can't play Val on it.
+                        </p>
+                    </div>
+                </section>
                 
-                <div class="bio-content">
-                    <p class="en-text">
-                        Hello! I'm a 21 year old uni student, currently right at the end of my "<a href="https://sylabusy.agh.edu.pl/pl/1/2/19/1/1/0/81">social informatics</a>" undergrad program. For a loooooooooooong WHILE i've been interested in the way people interact with computers - I spent quite a bit of time in the peripheral rabbit hole, to the point where I made <a href="https://github.com/Kamillon125/bonk/blob/gh-pages/index.md">my own keyboard layout</a> (!!! it's extremely useless BUT neat!). Peripherals are not all I'm interested in though, for a while there I was really into handheld video game consoles (and how they've evolved overtime), which, once again is very useless, but also quite neat! I love linguistics, too, and specifically the part of linguistics that relates to learning languages. I know Polish, English (C2-ish?), enough Ukrainian to have read a book in the language back in 2024 (Лаовай by Kateryna Kulyk), and have been flirting with a little bit of Italian recently. I'm also on the way to publishing a scientific article on language acquisition in video games, which should be out by the end of 2026. I used to be a MASSIVE Nintendo fan (a big mistake) and have played basically every single Pokemon and Zelda game that exists. I still love these franchises, especially the atmosphere of some of these games (completely agree with <a href="https://www.youtube.com/watch?v=xI43wgrPP28">Internet Pitstop</a> on YouTube as far as atmosphere in gaming) If you want to know more about my professional work stuff, here's my <a href="https://www.linkedin.com/in/kamil-niewiarowski/">LinkedIn</a>, you won't find that type of stuff on this website.
-                    </p>
-                    <p class="pl-text">
-                        Hejka! Jestem 21-letnim studentem <a href="https://sylabusy.agh.edu.pl/pl/1/2/19/1/1/0/81">informatyki społecznej AGH</a> (chociaż już właściwie kończę 1 stopień). Od kiedy pamiętam byłem bardzo zainteresowany tym, jak ludzie wchodzą w interakcję z komputerami - mega dużo czasu spędziłem czytając o urządzeniach peryferyjnych, aż do momentu kiedy zrobiłem <a href="https://github.com/Kamillon125/bonk/blob/gh-pages/index.md">własny układ klawiatury</a> (!!! jest to bardzo bezużyteczne, ale również fajne!). Urządzenia peryferyjne to nie wszystkie rzeczy około-człowieko-komputerowe, którymi się interesowałem - przez długi czas ciekawiłem się przenośnymi konsolami (i tym, jak zmieniały się na przestrzeni czasu), co, znowu, nie jest może najbardziej użyteczne i produktywne, ale mega mnie interesowało. Innym moim zainteresowaniem jest językoznawstwo, a w szczególności ta część językoznawstwa, która odnosi się do uczenia się języków obcych. Znam polski, angielski (C2), przeczytałem po ukraińsku książkę w 2024 (Лаовай Kateryny Kulyk), a od jakiegoś czasu zacząłem powolutku pracę nad włoskim. Jeśli wszystko się uda, to do końca 2026 będę miał opublikowany artykuł naukowy o przyswajaniu języków obcych w grach wideo. Kiedyś byłem BARDZO dużym fanem Nintendo (był to błąd) i w tamtym okresie przeszedłem właściwie wszystkie Pokemony i Zeldy, jakie tylko istniały. Wciąż bardzo lubię wracać do tych gier, szczególnie ze względu na ich klimat i vibe (całkowicie zgadzam się z <a href="https://www.youtube.com/watch?v=xI43wgrPP28">Internet Pitstop</a>, jeśli chodzi o klimat w grach) Jeżeli chcesz się dowiedzieć więcej o moich rzeczach zawodowych, to tutaj jest <a href="https://www.linkedin.com/in/kamil-niewiarowski/">LinkedIn</a>, tutaj tych rzeczy nie ma.
-                    </p>
-                </div>
-            </section>
+                <section id="video-games">
+                    <h2>
+                        <span class="pl-text">Gry wideo</span>
+                        <span class="en-text">Video games</span>
+                    </h2>
+                    <div class="video-games">
+                        <p class="pl-text">
+                            Gram właściwie od dziecka, ale mam kilka wspomnień związanych z grami, które są dla mnie szczególnie spoko. I nie mówię tutaj o jakichś sukcesach w grach kompetetywnych, bo nawet jeśli uznamy bycie top 1 na świecie za sukces, to z mojej perspektywy to wspomnienie po prostu znikło i nie ma już dla mnie żadnego znaczenia. To, co ma znaczenie, to wspomnienia związane z konkretnymi sytuacjami - pamiętam, jak grałem w swoje pierwsze Pokemony (Pokemon X) przez święta Bożego narodzenia, i jak tuż po Wigilii łapałem Mewtwo, oraz jak bardzo ten proces ułatwił Venusaur. Pamiętam również, jak podczas swoich matur ogrywałem po raz pierwszy Tears of The Kingdom - grę, która wzbudziła we mnie zainteresowanie Zeldą, i grę, przez którą następne dwa lata poświęciłem na granie we wszystkie Zeldy, które tylko mogłem znaleźć. Pamiętam wreszcie, jak po raz pierwszy w wieku 7 lat grałem w Minecrafta w wakacje i budowałem swoją pierwszą bazę wewnątrz minecraftowej góry. Jedno podsumowanie, które tutaj mam, to to, że moje ulubione gry wideo to nie najlepsze gry wideo, w jakie grałem - to gry wideo, w jakie grałem w najlepszych sytuacjach.
+                        </p>
+                        <p class="en-text">
+                            I've been playing video games ever since I was a small kid, and I do have some specific memories that I particularly cherish. And look, I'm not talking about some incredible achievements in competitive games, cause even if we consider being top 1 in the world a success, from my point of view that memory just disappeared and doesn't matter to me at all. What matters, however, are memories related to very specific situations in my life. I vividly remember playing through my first Pokemon game (Pokemon X) during christmas, and how right after Christmas Eve I was trying to catch Mewtwo - Venusaur, my absolute GOAT, made it so easy. I remember playing Tears of The Kingdom for the first time during my high school finals, and that game was SOOOO GOOD, that it singlehandedly made me interested in Zelda game and it was why I spent the next 2 years trying to play every single Zelda game I could find. And then, I also remember first playing Minecraft when I was 7 - that's when I built my first Minecraft base inside a mountain. I have one conclusion from all this - my favourite video games are not the best video games I've played, but instead the video games I played during very memorable parts of my life.
+                        </p>
+                    </div>
+                </section>
 
-            <section id="computer-stuff">
-                <h2>
-                    <span class="pl-text">Komputer</span>
-                    <span class="en-text">Computer stuff</span>
-                </h2>
-                <div class="computer">
-                    <p class="pl-text">
-                        Po wielu latach próbowania odejścia od Windowsa wreszcie mi się to (chyba) udało. Nie podoba mi się to, że MS Windows staje się po prostu coraz gorszy - szczerze nie chcę, żeby ktokolwiek wpychał mi do gardła Copilot, ani żeby mój system operacyjny korzystał z moich danych w większym stopniu, niż ja korzystam z mojego systemu operacyjnego. Wciąż mam gdzieś w komputerze system Windows, ale nie używam go właściwie nigdy (jest tylko w razie potrzeby, gdybym jakichś programów nie mógł odpalić na Linuxie). Obecnie korzystam z <a href="https://cachyos.org/">CachyOS</a> ze środowiskiem <a href="https://www.gnome.org/">Gnome</a>. Próbowałem <a href="https://system76.com/cosmic">COSMIC</a>, ale był zbyt nowy i trochę rzeczy na nim nie działało. Próbowałem również <a href="https://kde.org/">KDE</a>, który był całkiem git, ale nie podobał mi się wizualnie. Poza tym kiedyś używałem tiling window managera (<a href="https://github.com/WillPower3309/swayfx">swayfx</a>), ale szczerze nie miałem siły konfigurować dosłownie wszystkiego od podstaw, i wolałem lekko dostosować Gnome do swoich potrzeb. W sumie bardzo polecam Linuxa - zdecydowana większość rzeczy działa, nawet gry działają na karcie Nvidii (którą mam), a jeśli chodzi o gry multiplayer z antycheatem które nie działają (np Valorant), to tak właściwie to jest plus Linuxa, że nie mogę na nim grać w Valorant.
-                    </p>
-                    <p class="en-text">
-                        After many years of trying to quit Windows I think i've finally managed to do it. I really don't like how MS Windows is just getting worse and worse - like look, I really don't want Copilot being shoved down my throat, and I hate how Windows uses my personal data more than I use Windows as an OS. Like, I still have it somewhere on my PC, but that's only in case I ever come across software I NEED to open but can't on Linux, and 100% of my daily computer use is on Linux. Which, right now I'm using <a href="https://cachyos.org/">CachyOS</a> with the <a href="https://www.gnome.org/">Gnome Desktop Environment</a>. I tried <a href="https://system76.com/cosmic">COSMIC</a>, but it was waaaay too new and some things didn't work on it, and I also tried <a href="https://kde.org/">KDE</a>, which was good but honestly felt very bland and boring. Besides that, at some point in the past I tried tiling window managers (<a href="https://github.com/WillPower3309/swayfx">swayfx</a>), but like, honest to God, configuring EVERYTHING on your own and not even having a notification daemon out of the box was so annoying, that i'd rather just slightly adjust Gnome to fit my needs. I do recommend Linux - the vast majority of things "just works", even most video games work on my Nvidia GPU, and, honestly, as for the video games that don't work (such as Valorant), it's a selling point for Linux that you can't play Val on it.
-                    </p>
-                </div>
-            </section>
-            
-            <section id="video-games">
-                <h2>
-                    <span class="pl-text">Gry wideo</span>
-                    <span class="en-text">Video games</span>
-                </h2>
-                <div class="video-games">
-                    <p class="pl-text">
-                        Gram właściwie od dziecka, ale mam kilka wspomnień związanych z grami, które są dla mnie szczególnie spoko. I nie mówię tutaj o jakichś sukcesach w grach kompetetywnych, bo nawet jeśli uznamy bycie top 1 na świecie za sukces, to z mojej perspektywy to wspomnienie po prostu znikło i nie ma już dla mnie żadnego znaczenia. To, co ma znaczenie, to wspomnienia związane z konkretnymi sytuacjami - pamiętam, jak grałem w swoje pierwsze Pokemony (Pokemon X) przez święta Bożego narodzenia, i jak tuż po Wigilii łapałem Mewtwo, oraz jak bardzo ten proces ułatwił Venusaur. Pamiętam również, jak podczas swoich matur ogrywałem po raz pierwszy Tears of The Kingdom - grę, która wzbudziła we mnie zainteresowanie Zeldą, i grę, przez którą następne dwa lata poświęciłem na granie we wszystkie Zeldy, które tylko mogłem znaleźć. Pamiętam wreszcie, jak po raz pierwszy w wieku 7 lat grałem w Minecrafta w wakacje i budowałem swoją pierwszą bazę wewnątrz minecraftowej góry. Jedno podsumowanie, które tutaj mam, to to, że moje ulubione gry wideo to nie najlepsze gry wideo, w jakie grałem - to gry wideo, w jakie grałem w najlepszych sytuacjach.
-                    </p>
-                    <p class="en-text">
-                        I've been playing video games ever since I was a small kid, and I do have some specific memories that I particularly cherish. And look, I'm not talking about some incredible achievements in competitive games, cause even if we consider being top 1 in the world a success, from my point of view that memory just disappeared and doesn't matter to me at all. What matters, however, are memories related to very specific situations in my life. I vividly remember playing through my first Pokemon game (Pokemon X) during christmas, and how right after Christmas Eve I was trying to catch Mewtwo - Venusaur, my absolute GOAT, made it so easy. I remember playing Tears of The Kingdom for the first time during my high school finals, and that game was SOOOO GOOD, that it singlehandedly made me interested in Zelda game and it was why I spent the next 2 years trying to play every single Zelda game I could find. And then, I also remember first playing Minecraft when I was 7 - that's when I built my first Minecraft base inside a mountain. I have one conclusion from all this - my favourite video games are not the best video games I've played, but instead the video games I played during very memorable parts of my life.
-                    </p>
-                </div>
-            </section>
+                <section id="music">
+                    <h2>
+                        <span class="pl-text">Muzyka</span>
+                        <span class="en-text">Music</span>
+                    </h2>
+                    <div class="music">
+                        <p class="pl-text">
+                            Generalnie to im dłużej żyję na tym świecie, tym bardziej podoba mi się rap, i nie wiem, co z tym fantem zrobić. Ostatnio sporo słucham <a href="https://tacohemingway.com">Taco</a>, w szczególności <a href="https://open.spotify.com/album/6sIS875clsC3HlnRhIzXWL">"LATARNIE WSZĘDZIE DAWNO ZGASŁY"</a> i podoba mi się to, że przy każdym przesłuchaniu znajduję jakieś nowe smaczki. Ale tak całkowicie szczerze to muzyki słucham bardzo niewiele, właściwie tylko kiedy jadę autobusem, więc i na rap nie poświęcam dużo czasu.
+                        </p>
+                        <p class="en-text">
+                            The more time I spend on this planet, the more I like listening to rap, and I'm not sure what to do with this condition. Recently I've been listening to quite a bit of <a href="https://tacohemingway.com">Taco Hemingway</a>, especially his newest album - <a href="https://open.spotify.com/album/6sIS875clsC3HlnRhIzXWL">"LATARNIE WSZĘDZIE DAWNO ZGASŁY"</a> and the thing I like the most about it is that every single time I listen to it I can pick up on some new things I didn't pick up on before. Although, to be perfectly honest, I listen to music very little, basically only whenever I'm taking the bus home or to uni, so I don't spend that much time on rap either.
+                        </p>
+                    </div>
+                </section>
+            </div>
 
-            <section id="music">
-                <h2>
-                    <span class="pl-text">Muzyka</span>
-                    <span class="en-text">Music</span>
-                </h2>
-                <div class="music">
-                    <p class="pl-text">
-                        Generalnie to im dłużej żyję na tym świecie, tym bardziej podoba mi się rap, i nie wiem, co z tym fantem zrobić. Ostatnio sporo słucham <a href="https://tacohemingway.com">Taco</a>, w szczególności <a href="https://open.spotify.com/album/6sIS875clsC3HlnRhIzXWL">"LATARNIE WSZĘDZIE DAWNO ZGASŁY"</a> i podoba mi się to, że przy każdym przesłuchaniu znajduję jakieś nowe smaczki. Ale tak całkowicie szczerze to muzyki słucham bardzo niewiele, właściwie tylko kiedy jadę autobusem, więc i na rap nie poświęcam dużo czasu.
-                    </p>
-                    <p class="en-text">
-                        The more time I spend on this planet, the more I like listening to rap, and I'm not sure what to do with this condition. Recently I've been listening to quite a bit of <a href="https://tacohemingway.com">Taco Hemingway</a>, especially his newest album - <a href="https://open.spotify.com/album/6sIS875clsC3HlnRhIzXWL">"LATARNIE WSZĘDZIE DAWNO ZGASŁY"</a> and the thing I like the most about it is that every single time I listen to it I can pick up on some new things I didn't pick up on before. Although, to be perfectly honest, I listen to music very little, basically only whenever I'm taking the bus home or to uni, so I don't spend that much time on rap either.
-                    </p>
+            <div id="dashboard-tab" class="tab-content">
+                
+                <div class="searchable-dropdown">
+                    <input type="text" id="game-search" class="search-input" placeholder="Search for a game..." autocomplete="off">
+                    <div id="dropdown-list" class="dropdown-list"></div>
                 </div>
-            </section>
+
+                <div class="dash-meta">
+                    <img id="dash-img" src="placeholder.jpg" alt="Game Cover">
+                    <div class="dash-meta-info">
+                        <h2 id="dash-title">Select a Game</h2>
+                        <p><strong><span class="en-text">Series:</span><span class="pl-text">Seria:</span></strong> <span id="dash-series"></span> | <strong><span class="en-text">Year:</span><span class="pl-text">Rok:</span></strong> <span id="dash-year"></span></p>
+                        <p><strong><span class="en-text">Source:</span><span class="pl-text">Źródło:</span></strong> <span id="dash-source"></span></p>
+                        <p><strong><span class="en-text">Type:</span><span class="pl-text">Typ:</span></strong> <span id="dash-type"></span> | <strong><span class="en-text">Completeness:</span><span class="pl-text">Kompletność:</span></strong> <span id="dash-completeness"></span></p>
+                        <p><strong><span class="en-text">Voiceover:</span><span class="pl-text">Dubbing:</span></strong> <span id="dash-voice"></span></p>
+                        <p><strong><span class="en-text">Total Lines Extracted:</span><span class="pl-text">Suma Linii Dialogowych:</span></strong> <span id="dash-lines" class="stat"></span></p>
+                        <p><strong><span class="en-text">Word Count:</span><span class="pl-text">Liczba Słów:</span></strong> <span id="dash-words" class="stat"></span> | <strong><span class="en-text">Sentence Count:</span><span class="pl-text">Liczba Zdań:</span></strong> <span id="dash-sentences"></span></p>
+                    </div>
+                </div>
+
+                <div class="tier-1">
+                    <div class="tier-title">
+                        <span class="en-text">1. Learning Utility</span><span class="pl-text">1. Użyteczność w Uczeniu</span> 
+                        <span class="info-icon">i<span class="tooltip">Explanation placeholder for learning utility metric.</span></span>
+                    </div>
+                    
+                    <div class="grid-2" style="margin-bottom: 20px;">
+                        <div>
+                            <h4 style="margin: 0 0 10px 0;"><span class="en-text">Unique Vocab</span><span class="pl-text">Unikalne Słownictwo</span></h4>
+                            <canvas id="uniqueChart" height="150"></canvas>
+                        </div>
+                        <div>
+                            <h4 style="margin: 0 0 10px 0;"><span class="en-text">Learned Vocab</span><span class="pl-text">Przyswojone Słownictwo</span></h4>
+                            <canvas id="learnedChart" height="150"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="word-list-container">
+                        <div class="word-list">
+                            <strong>B2 <span class="en-text">Learned:</span><span class="pl-text">Przyswojone:</span></strong> 
+                            <div style="font-size: 0.85rem; color: var(--accent-color); margin-top: 2px; margin-bottom: 5px;">
+                                <strong>B2 Niewiarowski Index:</strong> <span id="b2-ni" class="stat"></span>
+                            </div>
+                            <div id="b2-words" class="scrollable-list"></div>
+                        </div>
+                        <div class="word-list">
+                            <strong>C1 <span class="en-text">Learned:</span><span class="pl-text">Przyswojone:</span></strong> 
+                            <div style="font-size: 0.85rem; color: var(--accent-color); margin-top: 2px; margin-bottom: 5px;">
+                                <strong>C1 Niewiarowski Index:</strong> <span id="c1-ni" class="stat"></span>
+                            </div>
+                            <div id="c1-words" class="scrollable-list"></div>
+                        </div>
+                        <div class="word-list">
+                            <strong>C2 <span class="en-text">Learned:</span><span class="pl-text">Przyswojone:</span></strong> 
+                            <div style="font-size: 0.85rem; color: var(--accent-color); margin-top: 2px; margin-bottom: 5px;">
+                                <strong>C2 Niewiarowski Index:</strong> <span id="c2-ni" class="stat"></span>
+                            </div>
+                            <div id="c2-words" class="scrollable-list"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tier-2 grid-2">
+                    <div>
+                        <div class="tier-title">
+                            <span class="en-text">2A. Syntactic & Lexical Metrics</span><span class="pl-text">2A. Metryki Składni i Leksyki</span>
+                            <span class="info-icon">i<span class="tooltip">Explanation placeholder for syntax metrics.</span></span>
+                        </div>
+                        <p><span class="en-text">Phrasal Verbs (per 1k):</span><span class="pl-text">Czasowniki Złożone (na 1k):</span> <span id="dash-pv" class="stat"></span></p>
+                        <p><span class="en-text">Slang Density:</span><span class="pl-text">Zagęszczenie Slangu:</span> <span id="dash-slang" class="stat"></span>%</p>
+                        <p><span class="en-text">Lexical Density (w/ Proper):</span><span class="pl-text">Gęstość Leksykalna (z Własnymi):</span> <span id="dash-lex-with" class="stat"></span>%</p>
+                        <p><span class="en-text">Lexical Density (w/o Proper):</span><span class="pl-text">Gęstość Leksykalna (bez Własnych):</span> <span id="dash-lex-without" class="stat"></span>%</p>
+                        <p><span class="en-text">Passives/Sentence:</span><span class="pl-text">Strona Bierna/Zdanie:</span> <span id="dash-passives" class="stat"></span></p>
+                        <p><span class="en-text">Subordinates/Sentence:</span><span class="pl-text">Zdania Podrzędne/Zdanie:</span> <span id="dash-sub" class="stat"></span></p>
+                        <p><span class="en-text">Conditionals/Sentence:</span><span class="pl-text">Tryby Warunkowe/Zdanie:</span> <span id="dash-cond" class="stat"></span></p>
+                        <p>TTR: <span id="dash-ttr" class="stat"></span> | MTLD: <span id="dash-mtld" class="stat"></span></p>
+                    </div>
+                    <div>
+                        <div class="tier-title">
+                            <span class="en-text">2B. CEFR Level Distribution</span><span class="pl-text">2B. Rozkład Poziomów CEFR</span>
+                            <span class="info-icon">i<span class="tooltip">Explanation placeholder for dual axis chart.</span></span>
+                        </div>
+                        <canvas id="distChart" height="150"></canvas>
+                    </div>
+                </div>
+
+                <div class="tier-3 grid-3">
+                    <div>
+                        <div class="tier-title">
+                            <span class="en-text">3A. Thresholds</span><span class="pl-text">3A. Progi (Thresholds)</span>
+                            <span class="info-icon">i<span class="tooltip">Explanation placeholder for vocabulary thresholds.</span></span>
+                        </div>
+                        <p>Total 95%: <strong id="dash-t95"></strong></p>
+                        <p>Total 98%: <strong id="dash-t98"></strong></p>
+                        <p>Unique 95%: <strong id="dash-u95"></strong></p>
+                        <p>Unique 98%: <strong id="dash-u98"></strong></p>
+                    </div>
+                    <div>
+                        <div class="tier-title">
+                            <span class="en-text">3B. CEFR Sentences</span><span class="pl-text">3B. Zdania CEFR</span>
+                            <span class="info-icon">i<span class="tooltip">Explanation placeholder for sentence analysis.</span></span>
+                        </div>
+                        <table class="cefr-table">
+                            <thead>
+                                <tr>
+                                    <th><span class="en-text">Level</span><span class="pl-text">Poziom</span></th>
+                                    <th><span class="en-text">Count</span><span class="pl-text">Liczba</span></th>
+                                    <th>%</th>
+                                </tr>
+                            </thead>
+                            <tbody id="cefr-sent-tbody"></tbody>
+                        </table>
+                    </div>
+                    <div>
+                        <div class="tier-title">
+                            <span class="en-text">3C. Readability (L1)</span><span class="pl-text">3C. Czytelność (L1)</span>
+                            <span class="info-icon">i<span class="tooltip">Explanation placeholder for readability metrics.</span></span>
+                        </div>
+                        <p>Flesch Reading Ease: <span id="dash-fre" class="stat"></span></p>
+                        <p>Flesch-Kincaid Grade: <span id="dash-fkg" class="stat"></span></p>
+                        <p>SMOG Index: <span id="dash-smog" class="stat"></span></p>
+                        <p>Dale-Chall: <span id="dash-dale" class="stat"></span></p>
+                    </div>
+                </div>
+
+                <div class="tier-4 grid-2">
+                    <div>
+                        <div class="tier-title">
+                            <span class="en-text">4A. Top Counts</span><span class="pl-text">4A. Najczęstsze Formy</span>
+                            <span class="info-icon">i<span class="tooltip">Explanation placeholder for frequent words/phrases.</span></span>
+                        </div>
+                        <p><strong><span class="en-text">Top Lemmas:</span><span class="pl-text">Lematy:</span></strong> <span id="dash-lemmas"></span></p>
+                        <p><strong><span class="en-text">Top Bigrams:</span><span class="pl-text">Bigramy:</span></strong> <span id="dash-bigrams"></span></p>
+                        <p><strong><span class="en-text">Verb-Preposition:</span><span class="pl-text">Czasownik-Przyimek:</span></strong> <span id="dash-verb-prep"></span></p>
+                        <p><strong><span class="en-text">Adjective-Noun:</span><span class="pl-text">Przymiotnik-Rzecz:</span></strong> <span id="dash-adj-noun"></span></p>
+                        <p><strong><span class="en-text">Phrasal Verbs:</span><span class="pl-text">Czasowniki Złożone:</span></strong> <span id="dash-top-pv"></span></p>
+                    </div>
+                    <div>
+                        <div class="tier-title">
+                            <span class="en-text">4B. OOV & Outliers</span><span class="pl-text">4B. OOV (Poza Słownikiem)</span>
+                            <span class="info-icon">i<span class="tooltip">Explanation placeholder for out-of-vocabulary words.</span></span>
+                        </div>
+                        <p><span class="en-text">OOV Rate:</span><span class="pl-text">Wskaźnik OOV:</span> <span id="dash-oov" class="stat"></span>%</p>
+                        <p><strong><span class="en-text">Top 10 OOV:</span><span class="pl-text">Top 10 OOV:</span></strong> <span id="dash-top-oov"></span></p>
+                        <button class="toggle-btn" onclick="document.getElementById('true-oov').classList.toggle('active')">
+                            <span class="en-text">Toggle Full OOV List</span><span class="pl-text">Przełącz Pełną Listę OOV</span>
+                        </button>
+                        <div id="true-oov" class="hidden-section"></div>
+                    </div>
+                </div>
+
+                <section id="dash-writeup">
+                    <h2>
+                        <span class="en-text">Methodology & Notes</span><span class="pl-text">Metodologia i Notatki</span>
+                    </h2>
+                    <p class="en-text">All video game cover art, titles, and associated imagery are the property of their respective publishers and developers. They are used here strictly for non-commercial, academic, and analytical purposes under the right of quotation/fair use.</p>
+                    <p class="pl-text">Wszystkie okładki gier wideo, tytuły i powiązane z nimi obrazy są własnością ich wydawców i deweloperów. Są one wykorzystywane w tym miejscu wyłącznie do celów niekomercyjnych, akademickich i analitycznych na mocy prawa cytatu/dozwolonego użytku.</p>
+                </section>
+            </div>
         </main>
 
         <footer>
             <small>2026 𖹭   |   discord @kamrl</small>
         </footer>
     </div>
-
-    <script>
-        // 0. AUTO THEME DETECTION (SYSTEM PREFERENCE)
-        (function() {
-            // Check if the user's OS prefers dark mode
-            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-                document.body.classList.add("dark-mode");
-            }
-        })();
-
-        // 1. NAME PRONUNCIATION
-        function playName() {
-            var audio = document.getElementById("name-audio");
-            audio.currentTime = 0; 
-            audio.play().catch(function(error) {
-                alert("Audio file not found! Check 'kamil_name.mp3'.");
-            });
-        }
-
-        // 2. LANGUAGE SWITCHER
-        function toggleLanguage() {
-            const body = document.body;
-            if (body.classList.contains('lang-en-active')) {
-                body.classList.remove('lang-en-active');
-                body.classList.add('lang-pl-active');
-            } else {
-                body.classList.remove('lang-pl-active');
-                body.classList.add('lang-en-active');
-            }
-        }
-
-        // 3. DARK MODE TOGGLE (MANUAL)
-        function toggleTheme() {
-            document.body.classList.toggle("dark-mode");
-        }
-
-        // 4. AMBIENT MUSIC
-        function toggleMusic() {
-            var music = document.getElementById("ambient-music");
-            var attribution = document.getElementById("music-attribution");
-            var btn = document.getElementById("music-btn");
-            
-            if (music.paused) {
-                music.play().catch(function(error) {
-                    alert("Music file not found! Ensure filename is exactly: bolero.mp3");
-                });
-                attribution.style.display = "block"; 
-                // Add class to toggle text to "Turn Off"
-                btn.classList.add("is-playing");
-            } else {
-                music.pause();
-                attribution.style.display = "none";
-                // Remove class to toggle text back to "Turn On"
-                btn.classList.remove("is-playing");
-            }
-        }
-    </script>
+    
+    <script src="main.js"></script>
 </body>
 </html>
