@@ -63,8 +63,8 @@
                     <span class="pl-text">Strona Główna</span>
                 </button>
                 <button class="tab-btn" onclick="switchTab('dashboard')">
-                    <span class="en-text">Linguistic Dashboard</span>
-                    <span class="pl-text">Panel Lingwistyczny</span>
+                    <span class="en-text">The Language of Video Games</span>
+                    <span class="pl-text">Język w Grach Wideo</span>
                 </button>
             </div>
 
@@ -153,7 +153,10 @@
                 <div class="tier-1">
                     <div class="tier-title">
                         <span class="en-text">1. Learning Utility</span><span class="pl-text">1. Użyteczność w Uczeniu</span> 
-                        <span class="info-icon">i<span class="tooltip">Explanation placeholder for learning utility metric.</span></span>
+                        <span class="info-icon">i<span class="tooltip">
+                            <span class="en-text">Firstly all the words were turned into their base forms through lemmatisation (running -> run). Then, they were assigned CEFR (language difficulty) levels with the python library cefrpy. When a word appears in a text 12 times in a variety of contexts, it can be considered learned (Nation, 2014), so the "learned" words are basically a count of base form words that appeared 12 or more times in a game, whereas "unique" is the amount of all unique words in that level. The Niewiarowski Index is the amount of learned words divided by the amount of words.</span>
+                            <span class="pl-text">Najpierw wszystkie słowa zostały sprowadzone do formy podstawowej poprzez lematyzację (running -> run). Następnie przypisano im poziomy trudności CEFR za pomocą biblioteki cefrpy. Kiedy słowo pojawia się w tekście 12 razy w różnych kontekstach, można je uznać za przyswojone (Nation, 2014). Słowa "przyswojone" to liczba słów bazowych pojawiających się 12 lub więcej razy, natomiast "unikalne" to liczba wszystkich unikalnych słów na danym poziomie. Niewiarowski Index to liczba słów przyswojonych podzielona przez całkowitą liczbę słów.</span>
+                        </span></span>
                     </div>
                     
                     <div class="grid-2" style="margin-bottom: 20px;">
@@ -196,7 +199,10 @@
                     <div>
                         <div class="tier-title">
                             <span class="en-text">2A. Syntactic & Lexical Metrics</span><span class="pl-text">2A. Metryki Składni i Leksyki</span>
-                            <span class="info-icon">i<span class="tooltip">Explanation placeholder for syntax metrics.</span></span>
+                            <span class="info-icon">i<span class="tooltip">
+                                <span class="en-text">Phrasal verbs per 1k are the amount of phrasal verbs (for example "give up", "shut up") in 1 000 words. Slang density is the amount of words that were tagged as "slang" (from my own limited slang filter I made) divided by the total amount of words in that game's text. Lexical density is the amount of "nouns, verbs, adjectives and adverbs" divided by the amount of total words (Johansson, 2008) including and not including proper nouns. Passives, subordinates and conditionals are the amount of passive voice, subordinate clauses and conditional clauses divided by the amount of sentences. TTR and MTLD are both language diversity metrics, but MTLD is less skewed by text length.</span>
+                                <span class="pl-text">Czasowniki złożone (phrasal verbs) na 1k to ich liczba (np. "give up", "shut up") na 1000 słów. Gęstość slangu to liczba słów oznaczonych jako slang podzielona przez całkowitą liczbę słów. Gęstość leksykalna to stosunek rzeczowników, czasowników, przymiotników i przysłówków do całkowitej liczby słów (Johansson, 2008). Strona bierna, zdania podrzędne i tryby warunkowe to ich ilość podzielona przez liczbę zdań. TTR i MTLD to metryki różnorodności języka, z tym że MTLD jest mniej podatne na zaburzenia przez długość tekstu.</span>
+                            </span></span>
                         </div>
                         <p><span class="en-text">Phrasal Verbs (per 1k):</span><span class="pl-text">Czasowniki Złożone (na 1k):</span> <span id="dash-pv" class="stat"></span></p>
                         <p><span class="en-text">Slang Density:</span><span class="pl-text">Zagęszczenie Slangu:</span> <span id="dash-slang" class="stat"></span>%</p>
@@ -210,7 +216,10 @@
                     <div>
                         <div class="tier-title">
                             <span class="en-text">2B. CEFR Level Distribution</span><span class="pl-text">2B. Rozkład Poziomów CEFR</span>
-                            <span class="info-icon">i<span class="tooltip">Explanation placeholder for dual axis chart.</span></span>
+                            <span class="info-icon">i<span class="tooltip">
+                                <span class="en-text">A bar chart with two axes - the left (blue) one represents the amount of total words tagged at a certain CEFR level (done with the python library cefrpy), and the right (orange) one represents the amount of unique words tagged at a certain CEFR level. Shows that the easiest (A1) words appear A LOT, but aren't as diverse, whereas the hardest (C2) words appear way less often, but they're more diverse (more unique words compared to total words).</span>
+                                <span class="pl-text">Wykres słupkowy z dwiema osiami - lewa (niebieska) to całkowita liczba słów oznaczonych danym poziomem CEFR, a prawa (pomarańczowa) to liczba unikalnych słów na danym poziomie. Pokazuje to, że najłatwiejsze (A1) słowa pojawiają się BARDZO CZĘSTO, ale są mniej różnorodne, podczas gdy te najtrudniejsze (C2) pojawiają się rzadziej, ale cechują się wyższą różnorodnością.</span>
+                            </span></span>
                         </div>
                         <canvas id="distChart" height="150"></canvas>
                     </div>
@@ -220,7 +229,10 @@
                     <div>
                         <div class="tier-title">
                             <span class="en-text">3A. Thresholds</span><span class="pl-text">3A. Progi (Thresholds)</span>
-                            <span class="info-icon">i<span class="tooltip">Explanation placeholder for vocabulary thresholds.</span></span>
+                            <span class="info-icon">i<span class="tooltip">
+                                <span class="en-text">According to Laufer, Batia (1989), 95% comprehension is necessary to understand the text you're reading. According to Hu, Marcella & Nation, Paul. (2000), 98% comprehension is necessary to acquire. It's possible these numbers are lower for video games (they're an interactive medium with audio and visuals, not just a book), but I added these metrics here anyways. They're basically saying at what linguistic level you have to be to comfortably understand and/or acquire vocabulary from a given game.</span>
+                                <span class="pl-text">Według Laufer, Batia (1989), do zrozumienia czytanego tekstu potrzebne jest 95% zrozumienia słów. Według Hu, Marcella i Nation, Paul (2000), do ich przyswojenia potrzeba 98%. Możliwe, że te wartości są niższe w grach wideo, ale dodałem je tutaj tak czy siak. Mówią one w uproszczeniu, na jakim poziomie musisz być, żeby komfortowo rozumieć grę i przyswajać słownictwo.</span>
+                            </span></span>
                         </div>
                         <p>Total 95%: <strong id="dash-t95"></strong></p>
                         <p>Total 98%: <strong id="dash-t98"></strong></p>
@@ -230,7 +242,10 @@
                     <div>
                         <div class="tier-title">
                             <span class="en-text">3B. CEFR Sentences</span><span class="pl-text">3B. Zdania CEFR</span>
-                            <span class="info-icon">i<span class="tooltip">Explanation placeholder for sentence analysis.</span></span>
+                            <span class="info-icon">i<span class="tooltip">
+                                <span class="en-text">I used https://huggingface.co/dksysd/cefr-classifier (an AI sentence classifier model) to classify every sentence in a game's transcription according to what CEFR level this model thinks it is.</span>
+                                <span class="pl-text">Użyłem modelu AI https://huggingface.co/dksysd/cefr-classifier, aby sklasyfikować każde zdanie w transkrypcji gry i przypisać mu szacowany poziom CEFR.</span>
+                            </span></span>
                         </div>
                         <table class="cefr-table">
                             <thead>
@@ -246,7 +261,10 @@
                     <div>
                         <div class="tier-title">
                             <span class="en-text">3C. Readability (L1)</span><span class="pl-text">3C. Czytelność (L1)</span>
-                            <span class="info-icon">i<span class="tooltip">Explanation placeholder for readability metrics.</span></span>
+                            <span class="info-icon">i<span class="tooltip">
+                                <span class="en-text">Various readability metrics for the game's text. Not all that important for second language learners - more important for people who natively speak English - they're all described in the methodology section below.</span>
+                                <span class="pl-text">Różne wskaźniki czytelności tekstu w grze. Nie są aż tak istotne dla osób uczących się języka obcego, ważniejsze dla native speakerów. Wszystkie opisano w metodologii poniżej.</span>
+                            </span></span>
                         </div>
                         <p>Flesch Reading Ease: <span id="dash-fre" class="stat"></span></p>
                         <p>Flesch-Kincaid Grade: <span id="dash-fkg" class="stat"></span></p>
@@ -259,7 +277,10 @@
                     <div>
                         <div class="tier-title">
                             <span class="en-text">4A. Top Counts</span><span class="pl-text">4A. Najczęstsze Formy</span>
-                            <span class="info-icon">i<span class="tooltip">Explanation placeholder for frequent words/phrases.</span></span>
+                            <span class="info-icon">i<span class="tooltip">
+                                <span class="en-text">Shows the most-often-appearing lemmas, bigrams, phrasal verbs, verb-preposition combos and adjective-noun combos. A lemma is a base form of a word (running -> run), a bigram is a combination of 2 words (I am; I'm, etc), a phrasal verb means something other than it would mean literally ("give up" means to stop trying and not give something to someone who's higher up than you). Verb-preposition combos are things like "look at", "return to", and adjective-noun combos are things like "fast dog", "iron sword"</span>
+                                <span class="pl-text">Pokazuje najczęściej pojawiające się lematy, bigramy, czasowniki złożone, kombinacje czasownik-przyimek oraz przymiotnik-rzeczownik. Lemat to forma podstawowa słowa (running -> run). Bigram to połączenie 2 słów. Czasownik złożony ma inne znaczenie niż to dosłowne. Kombinacje czasownik-przyimek to np. "look at", a przymiotnik-rzeczownik to np. "fast dog".</span>
+                            </span></span>
                         </div>
                         <p><strong><span class="en-text">Top Lemmas:</span><span class="pl-text">Lematy:</span></strong> <span id="dash-lemmas"></span></p>
                         <p><strong><span class="en-text">Top Bigrams:</span><span class="pl-text">Bigramy:</span></strong> <span id="dash-bigrams"></span></p>
@@ -270,7 +291,10 @@
                     <div>
                         <div class="tier-title">
                             <span class="en-text">4B. OOV & Outliers</span><span class="pl-text">4B. OOV (Poza Słownikiem)</span>
-                            <span class="info-icon">i<span class="tooltip">Explanation placeholder for out-of-vocabulary words.</span></span>
+                            <span class="info-icon">i<span class="tooltip">
+                                <span class="en-text">Out of vocabulary words are essentially words that appeared in the game, but did not appear in the english dictionary I used. "Top 10 OOV words" is just that, whereas the full OOV list also ignored all the character names and other useless filler, actually including only words that were truly "weird".</span>
+                                <span class="pl-text">Słowa spoza słownika (OOV) to w uproszczeniu takie, które pojawiły się w grze, ale nie było ich w słowniku angielskim, którego użyłem. Lista "Top 10 OOV" mówi sama za siebie, podczas gdy "Pełna Lista OOV" ignoruje imiona postaci i inne wypełniacze, pokazując jedynie faktycznie "dziwne" słowa.</span>
+                            </span></span>
                         </div>
                         <p><span class="en-text">OOV Rate:</span><span class="pl-text">Wskaźnik OOV:</span> <span id="dash-oov" class="stat"></span>%</p>
                         <p><strong><span class="en-text">Top 10 OOV:</span><span class="pl-text">Top 10 OOV:</span></strong> <span id="dash-top-oov"></span></p>
@@ -279,6 +303,16 @@
                         </button>
                         <div id="true-oov" class="hidden-section"></div>
                     </div>
+                </div>
+
+                <div class="tier-total-stats" style="margin-top: 30px; padding: 20px; background: var(--container-bg); border: 1px solid var(--border-color); border-radius: 5px;">
+                    <h2 style="margin-top: 0;">
+                        <span class="en-text">Global Corpus Stats</span><span class="pl-text">Statystyki Globalne Korpusu</span>
+                    </h2>
+                    <p><strong><span class="en-text">Total Games Analyzed:</span><span class="pl-text">Suma Przeanalizowanych Gier:</span></strong> 56</p>
+                    <p><strong><span class="en-text">Total Lines Extracted:</span><span class="pl-text">Suma Wyekstrahowanych Linii:</span></strong> <span id="global-lines">N/A</span></p>
+                    <p><strong><span class="en-text">Total Sentences:</span><span class="pl-text">Suma Zdań:</span></strong> <span id="global-sentences">N/A</span></p>
+                    <p><strong><span class="en-text">Total Words Analyzed:</span><span class="pl-text">Suma Przeanalizowanych Słów:</span></strong> <span id="global-words">N/A</span></p>
                 </div>
 
                 <section id="dash-writeup">

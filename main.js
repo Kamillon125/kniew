@@ -171,6 +171,23 @@ function initDashboard() {
         return;
     }
 
+    if (typeof globalMetrics !== 'undefined') {
+        const gm = globalMetrics;
+        const linesEl = document.getElementById('global-lines');
+        const sentEl = document.getElementById('global-sentences');
+        const wordsEl = document.getElementById('global-words');
+        
+        if (linesEl && gm.corpus_global_metrics && gm.corpus_global_metrics.total_lines_extracted && gm.corpus_global_metrics.total_lines_extracted.sum !== undefined) {
+            linesEl.textContent = gm.corpus_global_metrics.total_lines_extracted.sum.toLocaleString();
+        }
+        if (sentEl && gm.grand_total_sentences_sum !== undefined) {
+            sentEl.textContent = gm.grand_total_sentences_sum.toLocaleString();
+        }
+        if (wordsEl && gm.word_count_total_sum !== undefined) {
+            wordsEl.textContent = gm.word_count_total_sum.toLocaleString();
+        }
+    }
+
     if (gMetrics) {
         gamesData['corpus_median_game'] = createMedianGame();
         if (typeof voiceData !== 'undefined') voiceData['corpus_median_game'] = { proper_title: "-- CORPUS MEDIAN --", voice_acting: "N/A", year: "N/A" };
