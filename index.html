@@ -4,18 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kamil Niewiarowski</title>
-
-    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-    <link rel="shortcut icon" href="favicon.ico">
-    
     <link rel="stylesheet" href="styles.css">
     <script src="dashboard_data.js"></script>
+    <script src="content.js"></script> 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
-
-<body class="lang-en-active">
+<body>
     <div class="container">
         <header>
             <div class="header-left">
@@ -24,114 +18,46 @@
                     <button class="audio-btn" onclick="playName()" title="Listen to pronunciation">🔊</button>
                     <audio id="name-audio" src="kamil_name.mp3"></audio>
                 </div>
-                
-                <div id="music-attribution">
-                    <span class="en-text">Playing: "Bolero" by Maurice Ravel performed by Lamoureux Orchestra</span>
-                    <span class="pl-text">Teraz gra: "Bolero" Maurice'a Ravela w wykonaniu Orkiestry Lamoureux</span>
-                </div>
+                <div id="music-attribution" data-i18n="controls.attribution"></div>
             </div>
 
             <div class="header-controls">
                 <button id="music-btn" onclick="toggleMusic()">
-                    <span class="music-label-on">
-                        <span class="en-text">Turn on music</span>
-                        <span class="pl-text">Włącz muzykę</span>
-                    </span>
-                    <span class="music-label-off">
-                        <span class="en-text">Turn off music</span>
-                        <span class="pl-text">Wyłącz muzykę</span>
-                    </span>
+                    <span class="music-label-on" data-i18n="controls.music_on"></span>
+                    <span class="music-label-off" data-i18n="controls.music_off"></span>
                 </button>
                 <audio id="ambient-music" src="bolero.mp3" loop></audio>
-
-                <button onclick="toggleTheme()">
-                    <span class="en-text">Light/Dark</span>
-                    <span class="pl-text">Jasny/Ciemny</span>
-                </button>
-
-                <button class="lang-toggle" onclick="toggleLanguage()">
-                    <span class="en-text">Change to Polish 🇵🇱</span>
-                    <span class="pl-text">Zmień na angielski 🇬🇧</span>
-                </button>
+                <button onclick="toggleTheme()" data-i18n="controls.theme"></button>
+                <button class="lang-toggle" onclick="toggleLanguage()" data-i18n="controls.lang"></button>
             </div>
         </header>
 
         <main>
             <div class="tab-nav">
-                <button class="tab-btn active" onclick="switchTab('home')">
-                    <span class="en-text">Home</span>
-                    <span class="pl-text">Strona Główna</span>
-                </button>
-                <button class="tab-btn" onclick="switchTab('dashboard')">
-                    <span class="en-text">The Language of Video Games</span>
-                    <span class="pl-text">Język w Grach Wideo</span>
-                </button>
+                <button class="tab-btn active" onclick="switchTab('home')" data-i18n="nav.home"></button>
+                <button class="tab-btn" onclick="switchTab('dashboard')" data-i18n="nav.dashboard"></button>
             </div>
 
             <div id="home-tab" class="tab-content active">
                 <section id="about">
-                    <h2>
-                        <span class="en-text">About Me</span>
-                        <span class="pl-text">O Mnie</span>
-                    </h2>
-                    <div class="bio-content">
-                        <p class="en-text">
-                            Hello! I'm a 21 year old uni student, currently right at the end of my "<a href="https://sylabusy.agh.edu.pl/pl/1/2/19/1/1/0/81">social informatics</a>" undergrad program. For a loooooooooooong WHILE i've been interested in the way people interact with computers - I spent quite a bit of time in the peripheral rabbit hole, to the point where I made <a href="https://github.com/Kamillon125/bonk/blob/gh-pages/index.md">my own keyboard layout</a> (!!! it's extremely useless BUT neat!). Peripherals are not all I'm interested in though, for a while there I was really into handheld video game consoles (and how they've evolved overtime), which, once again is very useless, but also quite neat! I love linguistics, too, and specifically the part of linguistics that relates to learning languages. I know Polish, English (C2-ish?), enough Ukrainian to have read a book in the language back in 2024 (Лаовай by Kateryna Kulyk), and have been flirting with a little bit of Italian recently. I'm also on the way to publishing a scientific article on language acquisition in video games, which should be out by the end of 2026. I used to be a MASSIVE Nintendo fan (a big mistake) and have played basically every single Pokemon and Zelda game that exists. I still love these franchises, especially the atmosphere of some of these games (completely agree with <a href="https://www.youtube.com/watch?v=xI43wgrPP28">Internet Pitstop</a> on YouTube as far as atmosphere in gaming) If you want to know more about my professional work stuff, here's my <a href="https://www.linkedin.com/in/kamil-niewiarowski/">LinkedIn</a>, you won't find that type of stuff on this website.
-                        </p>
-                        <p class="pl-text">
-                            Hejka! Jestem 21-letnim studentem <a href="https://sylabusy.agh.edu.pl/pl/1/2/19/1/1/0/81">informatyki społecznej AGH</a> (chociaż już właściwie kończę 1 stopień). Od kiedy pamiętam byłem bardzo zainteresowany tym, jak ludzie wchodzą w interakcję z komputerami - mega dużo czasu spędziłem czytając o urządzeniach peryferyjnych, aż do momentu kiedy zrobiłem <a href="https://github.com/Kamillon125/bonk/blob/gh-pages/index.md">własny układ klawiatury</a> (!!! jest to bardzo bezużyteczne, ale również fajne!). Urządzenia peryferyjne to nie wszystkie rzeczy około-człowieko-komputerowe, którymi się interesowałem - przez długi czas ciekawiłem się przenośnymi konsolami (i tym, jak zmieniały się na przestrzeni czasu), co, znowu, nie jest może najbardziej użyteczne i produktywne, ale mega mnie interesowało. Innym moim zainteresowaniem jest językoznawstwo, a w szczególności ta część językoznawstwa, która odnosi się do uczenia się języków obcych. Znam polski, angielski (C2), przeczytałem po ukraińsku książkę w 2024 (Лаовай Kateryny Kulyk), a od jakiegoś czasu zacząłem powolutku pracę nad włoskim. Jeśli wszystko się uda, to do końca 2026 będę miał opublikowany artykuł naukowy o przyswajaniu języków obcych w grach wideo. Kiedyś byłem BARDZO dużym fanem Nintendo (był to błąd) i w tamtym okresie przeszedłem właściwie wszystkie Pokemony i Zeldy, jakie tylko istniały. Wciąż bardzo lubię wracać do tych gier, szczególnie ze względu na ich klimat i vibe (całkowicie zgadzam się z <a href="https://www.youtube.com/watch?v=xI43wgrPP28">Internet Pitstop</a>, jeśli chodzi o klimat w grach) Jeżeli chcesz się dowiedzieć więcej o moich rzeczach zawodowych, to tutaj jest <a href="https://www.linkedin.com/in/kamil-niewiarowski/">LinkedIn</a>, tutaj tych rzeczy nie ma.
-                        </p>
-                    </div>
+                    <h2 data-i18n="about.title"></h2>
+                    <div class="bio-content"><p data-i18n="about.p1"></p></div>
                 </section>
-
                 <section id="computer-stuff">
-                    <h2>
-                        <span class="pl-text">Komputer</span>
-                        <span class="en-text">Computer stuff</span>
-                    </h2>
-                    <div class="computer">
-                        <p class="pl-text">
-                            Po wielu latach próbowania odejścia od Windowsa wreszcie mi się to (chyba) udało. Nie podoba mi się to, że MS Windows staje się po prostu coraz gorszy - szczerze nie chcę, żeby ktokolwiek wpychał mi do gardła Copilot, ani żeby mój system operacyjny korzystał z moich danych w większym stopniu, niż ja korzystam z mojego systemu operacyjnego. Wciąż mam gdzieś w komputerze system Windows, ale nie używam go właściwie nigdy (jest tylko w razie potrzeby, gdybym jakichś programów nie mógł odpalić na Linuxie). Obecnie korzystam z <a href="https://cachyos.org/">CachyOS</a> ze środowiskiem <a href="https://www.gnome.org/">Gnome</a>. Próbowałem <a href="https://system76.com/cosmic">COSMIC</a>, ale był zbyt nowy i trochę rzeczy na nim nie działało. Próbowałem również <a href="https://kde.org/">KDE</a>, który był całkiem git, ale nie podobał mi się wizualnie. Poza tym kiedyś używałem tiling window managera (<a href="https://github.com/WillPower3309/swayfx">swayfx</a>), ale szczerze nie miałem siły konfigurować dosłownie wszystkiego od podstaw, i wolałem lekko dostosować Gnome do swoich potrzeb. W sumie bardzo polecam Linuxa - zdecydowana większość rzeczy działa, nawet gry działają na karcie Nvidii (którą mam), a jeśli chodzi o gry multiplayer z antycheatem które nie działają (np Valorant), to tak właściwie to jest plus Linuxa, że nie mogę na nim grać w Valorant.
-                        </p>
-                        <p class="en-text">
-                            After many years of trying to quit Windows I think i've finally managed to do it. I really don't like how MS Windows is just getting worse and worse - like look, I really don't want Copilot being shoved down my throat, and I hate how Windows uses my personal data more than I use Windows as an OS. Like, I still have it somewhere on my PC, but that's only in case I ever come across software I NEED to open but can't on Linux, and 100% of my daily computer use is on Linux. Which, right now I'm using <a href="https://cachyos.org/">CachyOS</a> with the <a href="https://www.gnome.org/">Gnome Desktop Environment</a>. I tried <a href="https://system76.com/cosmic">COSMIC</a>, but it was waaaay too new and some things didn't work on it, and I also tried <a href="https://kde.org/">KDE</a>, which was good but honestly felt very bland and boring. Besides that, at some point in the past I tried tiling window managers (<a href="https://github.com/WillPower3309/swayfx">swayfx</a>), but like, honest to God, configuring EVERYTHING on your own and not even having a notification daemon out of the box was so annoying, that i'd rather just slightly adjust Gnome to fit my needs. I do recommend Linux - the vast majority of things "just works", even most video games work on my Nvidia GPU, and, honestly, as for the video games that don't work (such as Valorant), it's a selling point for Linux that you can't play Val on it.
-                        </p>
-                    </div>
+                    <h2 data-i18n="computer.title"></h2>
+                    <div class="computer"><p data-i18n="computer.p1"></p></div>
                 </section>
-                
                 <section id="video-games">
-                    <h2>
-                        <span class="pl-text">Gry wideo</span>
-                        <span class="en-text">Video games</span>
-                    </h2>
-                    <div class="video-games">
-                        <p class="pl-text">
-                            Gram właściwie od dziecka, ale mam kilka wspomnień związanych z grami, które są dla mnie szczególnie spoko. I nie mówię tutaj o jakichś sukcesach w grach kompetetywnych, bo nawet jeśli uznamy bycie top 1 na świecie za sukces, to z mojej perspektywy to wspomnienie po prostu znikło i nie ma już dla mnie żadnego znaczenia. To, co ma znaczenie, to wspomnienia związane z konkretnymi sytuacjami - pamiętam, jak grałem w swoje pierwsze Pokemony (Pokemon X) przez święta Bożego narodzenia, i jak tuż po Wigilii łapałem Mewtwo, oraz jak bardzo ten proces ułatwił Venusaur. Pamiętam również, jak podczas swoich matur ogrywałem po raz pierwszy Tears of The Kingdom - grę, która wzbudziła we mnie zainteresowanie Zeldą, i grę, przez którą następne dwa lata poświęciłem na granie we wszystkie Zeldy, które tylko mogłem znaleźć. Pamiętam wreszcie, jak po raz pierwszy w wieku 7 lat grałem w Minecrafta w wakacje i budowałem swoją pierwszą bazę wewnątrz minecraftowej góry. Jedno podsumowanie, które tutaj mam, to to, że moje ulubione gry wideo to nie najlepsze gry wideo, w jakie grałem - to gry wideo, w jakie grałem w najlepszych sytuacjach.
-                        </p>
-                        <p class="en-text">
-                            I've been playing video games ever since I was a small kid, and I do have some specific memories that I particularly cherish. And look, I'm not talking about some incredible achievements in competitive games, cause even if we consider being top 1 in the world a success, from my point of view that memory just disappeared and doesn't matter to me at all. What matters, however, are memories related to very specific situations in my life. I vividly remember playing through my first Pokemon game (Pokemon X) during christmas, and how right after Christmas Eve I was trying to catch Mewtwo - Venusaur, my absolute GOAT, made it so easy. I remember playing Tears of The Kingdom for the first time during my high school finals, and that game was SOOOO GOOD, that it singlehandedly made me interested in Zelda game and it was why I spent the next 2 years trying to play every single Zelda game I could find. And then, I also remember first playing Minecraft when I was 7 - that's when I built my first Minecraft base inside a mountain. I have one conclusion from all this - my favourite video games are not the best video games I've played, but instead the video games I played during very memorable parts of my life.
-                        </p>
-                    </div>
+                    <h2 data-i18n="games.title"></h2>
+                    <div class="video-games"><p data-i18n="games.p1"></p></div>
                 </section>
-
                 <section id="music">
-                    <h2>
-                        <span class="pl-text">Muzyka</span>
-                        <span class="en-text">Music</span>
-                    </h2>
-                    <div class="music">
-                        <p class="pl-text">
-                            Generalnie to im dłużej żyję na tym świecie, tym bardziej podoba mi się rap, i nie wiem, co z tym fantem zrobić. Ostatnio sporo słucham <a href="https://tacohemingway.com">Taco</a>, w szczególności <a href="https://open.spotify.com/album/6sIS875clsC3HlnRhIzXWL">"LATARNIE WSZĘDZIE DAWNO ZGASŁY"</a> i podoba mi się to, że przy każdym przesłuchaniu znajduję jakieś nowe smaczki. Ale tak całkowicie szczerze to muzyki słucham bardzo niewiele, właściwie tylko kiedy jadę autobusem, więc i na rap nie poświęcam dużo czasu.
-                        </p>
-                        <p class="en-text">
-                            The more time I spend on this planet, the more I like listening to rap, and I'm not sure what to do with this condition. Recently I've been listening to quite a bit of <a href="https://tacohemingway.com">Taco Hemingway</a>, especially his newest album - <a href="https://open.spotify.com/album/6sIS875clsC3HlnRhIzXWL">"LATARNIE WSZĘDZIE DAWNO ZGASŁY"</a> and the thing I like the most about it is that every single time I listen to it I can pick up on some new things I didn't pick up on before. Although, to be perfectly honest, I listen to music very little, basically only whenever I'm taking the bus home or to uni, so I don't spend that much time on rap either.
-                        </p>
-                    </div>
+                    <h2 data-i18n="music.title"></h2>
+                    <div class="music"><p data-i18n="music.p1"></p></div>
                 </section>
             </div>
 
             <div id="dashboard-tab" class="tab-content">
-                
                 <div class="searchable-dropdown">
                     <input type="text" id="game-search" class="search-input" placeholder="Search for a game..." autocomplete="off">
                     <div id="dropdown-list" class="dropdown-list"></div>
@@ -141,54 +67,51 @@
                     <img id="dash-img" src="placeholder.jpg" alt="Game Cover">
                     <div class="dash-meta-info">
                         <h2 id="dash-title">Select a Game</h2>
-                        <p><strong><span class="en-text">Series:</span><span class="pl-text">Seria:</span></strong> <span id="dash-series"></span> | <strong><span class="en-text">Year:</span><span class="pl-text">Rok:</span></strong> <span id="dash-year"></span></p>
-                        <p><strong><span class="en-text">Source:</span><span class="pl-text">Źródło:</span></strong> <span id="dash-source"></span></p>
-                        <p><strong><span class="en-text">Type:</span><span class="pl-text">Typ:</span></strong> <span id="dash-type"></span> | <strong><span class="en-text">Completeness:</span><span class="pl-text">Kompletność:</span></strong> <span id="dash-completeness"></span></p>
-                        <p><strong><span class="en-text">Voiceover:</span><span class="pl-text">Dubbing:</span></strong> <span id="dash-voice"></span></p>
-                        <p><strong><span class="en-text">Total Lines Extracted:</span><span class="pl-text">Suma Linii Dialogowych:</span></strong> <span id="dash-lines" class="stat"></span></p>
-                        <p><strong><span class="en-text">Word Count:</span><span class="pl-text">Liczba Słów:</span></strong> <span id="dash-words" class="stat"></span> | <strong><span class="en-text">Sentence Count:</span><span class="pl-text">Liczba Zdań:</span></strong> <span id="dash-sentences"></span></p>
+                        <p><strong data-i18n="dashboard.series"></strong>: <span id="dash-series"></span> | <strong data-i18n="dashboard.year"></strong>: <span id="dash-year"></span></p>
+                        <p><strong data-i18n="dashboard.source"></strong>: <span id="dash-source"></span> <span class="info-icon">i<span class="tooltip" data-i18n="tooltips.source"></span></span></p>
+                        <p><strong data-i18n="dashboard.type"></strong>: <span id="dash-type"></span> <span class="info-icon">i<span class="tooltip" data-i18n="tooltips.type"></span></span> | <strong data-i18n="dashboard.completeness"></strong>: <span id="dash-completeness"></span> <span class="info-icon">i<span class="tooltip" data-i18n="tooltips.completeness"></span></span></p>
+                        <p><strong data-i18n="dashboard.voiceover"></strong>: <span id="dash-voice"></span> <span class="info-icon">i<span class="tooltip" data-i18n="tooltips.voiceover"></span></span></p>
+                        <p><strong data-i18n="dashboard.total_lines"></strong>: <span id="dash-lines" class="stat"></span> <span class="info-icon">i<span class="tooltip" data-i18n="tooltips.total_lines"></span></span></p>
+                        <p><strong data-i18n="dashboard.word_count"></strong>: <span id="dash-words" class="stat"></span> <span class="info-icon">i<span class="tooltip" data-i18n="tooltips.word_count"></span></span> | <strong data-i18n="dashboard.sentence_count"></strong>: <span id="dash-sentences"></span> <span class="info-icon">i<span class="tooltip" data-i18n="tooltips.sentence_count"></span></span></p>
                     </div>
                 </div>
 
                 <div class="tier-1">
                     <div class="tier-title">
-                        <span class="en-text">1. Learning Utility</span><span class="pl-text">1. Użyteczność w Uczeniu</span> 
-                        <span class="info-icon">i<span class="tooltip">
-                            <span class="en-text">Firstly all the words were turned into their base forms through lemmatisation (running -> run). Then, they were assigned CEFR (language difficulty) levels with the python library cefrpy. When a word appears in a text 12 times in a variety of contexts, it can be considered learned (Nation, 2014), so the "learned" words are basically a count of base form words that appeared 12 or more times in a game, whereas "unique" is the amount of all unique words in that level. The Acquisitional Index is the amount of learned words divided by the amount of words.</span>
-                            <span class="pl-text">Najpierw wszystkie słowa zostały sprowadzone do formy podstawowej poprzez lematyzację (running -> run). Następnie przypisano im poziomy trudności CEFR za pomocą biblioteki cefrpy. Kiedy słowo pojawia się w tekście 12 razy w różnych kontekstach, można je uznać za przyswojone (Nation, 2014). Słowa "przyswojone" to liczba słów bazowych pojawiających się 12 lub więcej razy, natomiast "unikalne" to liczba wszystkich unikalnych słów na danym poziomie. Wskaźnik przyswajania to liczba słów przyswojonych podzielona przez całkowitą liczbę słów.</span>
-                        </span></span>
+                        <span data-i18n="dashboard.tier1_title"></span> 
+                        <span class="info-icon">i<span class="tooltip" data-i18n="dashboard.tier1_desc"></span></span>
                     </div>
                     
                     <div class="grid-2" style="margin-bottom: 20px;">
                         <div>
-                            <h4 style="margin: 0 0 10px 0;"><span class="en-text">Unique Vocab</span><span class="pl-text">Unikalne Słownictwo</span></h4>
+                            <h4 style="margin: 0 0 10px 0;"><span data-i18n="dashboard.unique_vocab"></span> <span class="info-icon">i<span class="tooltip" data-i18n="tooltips.unique_vocab"></span></span></h4>
                             <canvas id="uniqueChart" height="150"></canvas>
                         </div>
                         <div>
-                            <h4 style="margin: 0 0 10px 0;"><span class="en-text">Learned Vocab</span><span class="pl-text">Przyswojone Słownictwo</span></h4>
+                            <h4 style="margin: 0 0 10px 0;"><span data-i18n="dashboard.learned_vocab"></span> <span class="info-icon">i<span class="tooltip" data-i18n="tooltips.learned_vocab"></span></span></h4>
                             <canvas id="learnedChart" height="150"></canvas>
                         </div>
                     </div>
 
                     <div class="word-list-container">
                         <div class="word-list">
-                            <strong>B2 <span class="en-text">Learned:</span><span class="pl-text">Przyswojone:</span></strong> 
+                            <strong data-i18n="dashboard.learned_b2"></strong>:
                             <div style="font-size: 0.85rem; color: var(--accent-color); margin-top: 2px; margin-bottom: 5px;">
-                                <strong>B2 Acquisitional Index:</strong> <span id="b2-ni" class="stat"></span>
+                                <strong>B2 Acquisitional Index:</strong> <span id="b2-ni" class="stat"></span> <span class="info-icon">i<span class="tooltip" data-i18n="tooltips.acq_index"></span></span>
                             </div>
                             <div id="b2-words" class="scrollable-list"></div>
                         </div>
                         <div class="word-list">
-                            <strong>C1 <span class="en-text">Learned:</span><span class="pl-text">Przyswojone:</span></strong> 
+                            <strong data-i18n="dashboard.learned_c1"></strong>:
                             <div style="font-size: 0.85rem; color: var(--accent-color); margin-top: 2px; margin-bottom: 5px;">
-                                <strong>C1 Acquisitional Index:</strong> <span id="c1-ni" class="stat"></span>
+                                <strong>C1 Acquisitional Index:</strong> <span id="c1-ni" class="stat"></span> <span class="info-icon">i<span class="tooltip" data-i18n="tooltips.acq_index"></span></span>
                             </div>
                             <div id="c1-words" class="scrollable-list"></div>
                         </div>
                         <div class="word-list">
-                            <strong>C2 <span class="en-text">Learned:</span><span class="pl-text">Przyswojone:</span></strong> 
+                            <strong data-i18n="dashboard.learned_c2"></strong>:
                             <div style="font-size: 0.85rem; color: var(--accent-color); margin-top: 2px; margin-bottom: 5px;">
-                                <strong>C2 Acquisitional Index:</strong> <span id="c2-ni" class="stat"></span>
+                                <strong>C2 Acquisitional Index:</strong> <span id="c2-ni" class="stat"></span> <span class="info-icon">i<span class="tooltip" data-i18n="tooltips.acq_index"></span></span>
                             </div>
                             <div id="c2-words" class="scrollable-list"></div>
                         </div>
@@ -198,28 +121,22 @@
                 <div class="tier-2 grid-2">
                     <div>
                         <div class="tier-title">
-                            <span class="en-text">2A. Syntactic & Lexical Metrics</span><span class="pl-text">2A. Metryki Składni i Leksyki</span>
-                            <span class="info-icon">i<span class="tooltip">
-                                <span class="en-text">Phrasal verbs per 1k are the amount of phrasal verbs (for example "give up", "shut up") in 1 000 words. Slang density is the amount of words that were tagged as "slang" (from my own limited slang filter I made) divided by the total amount of words in that game's text. Lexical density is the amount of "nouns, verbs, adjectives and adverbs" divided by the amount of total words (Johansson, 2008) including and not including proper nouns. Passives, subordinates and conditionals are the amount of passive voice, subordinate clauses and conditional clauses divided by the amount of sentences. TTR and MTLD are both language diversity metrics, but MTLD is less skewed by text length.</span>
-                                <span class="pl-text">Czasowniki złożone (phrasal verbs) na 1k to ich liczba (np. "give up", "shut up") na 1000 słów. Gęstość slangu to liczba słów oznaczonych jako slang podzielona przez całkowitą liczbę słów. Gęstość leksykalna to stosunek rzeczowników, czasowników, przymiotników i przysłówków do całkowitej liczby słów (Johansson, 2008). Strona bierna, zdania podrzędne i tryby warunkowe to ich ilość podzielona przez liczbę zdań. TTR i MTLD to metryki różnorodności języka, z tym że MTLD jest mniej podatne na zaburzenia przez długość tekstu.</span>
-                            </span></span>
+                            <span data-i18n="dashboard.tier2a_title"></span>
+                            <span class="info-icon">i<span class="tooltip" data-i18n="dashboard.tier2a_desc"></span></span>
                         </div>
-                        <p><span class="en-text">Phrasal Verbs (per 1k):</span><span class="pl-text">Czasowniki Złożone (na 1k):</span> <span id="dash-pv" class="stat"></span></p>
-                        <p><span class="en-text">Slang Density:</span><span class="pl-text">Zagęszczenie Slangu:</span> <span id="dash-slang" class="stat"></span>%</p>
-                        <p><span class="en-text">Lexical Density (w/ Proper):</span><span class="pl-text">Gęstość Leksykalna (z Własnymi):</span> <span id="dash-lex-with" class="stat"></span>%</p>
-                        <p><span class="en-text">Lexical Density (w/o Proper):</span><span class="pl-text">Gęstość Leksykalna (bez Własnych):</span> <span id="dash-lex-without" class="stat"></span>%</p>
-                        <p><span class="en-text">Passives/Sentence:</span><span class="pl-text">Strona Bierna/Zdanie:</span> <span id="dash-passives" class="stat"></span></p>
-                        <p><span class="en-text">Subordinates/Sentence:</span><span class="pl-text">Zdania Podrzędne/Zdanie:</span> <span id="dash-sub" class="stat"></span></p>
-                        <p><span class="en-text">Conditionals/Sentence:</span><span class="pl-text">Tryby Warunkowe/Zdanie:</span> <span id="dash-cond" class="stat"></span></p>
-                        <p>TTR: <span id="dash-ttr" class="stat"></span> | MTLD: <span id="dash-mtld" class="stat"></span></p>
+                        <p><span data-i18n="dashboard.pv_1k"></span>: <span id="dash-pv" class="stat"></span> <span class="info-icon">i<span class="tooltip" data-i18n="tooltips.pv"></span></span></p>
+                        <p><span data-i18n="dashboard.slang_dens"></span>: <span id="dash-slang" class="stat"></span>% <span class="info-icon">i<span class="tooltip" data-i18n="tooltips.slang"></span></span></p>
+                        <p><span data-i18n="dashboard.lex_with"></span>: <span id="dash-lex-with" class="stat"></span>% <span class="info-icon">i<span class="tooltip" data-i18n="tooltips.lexical_prop"></span></span></p>
+                        <p><span data-i18n="dashboard.lex_without"></span>: <span id="dash-lex-without" class="stat"></span>% <span class="info-icon">i<span class="tooltip" data-i18n="tooltips.lexical_no_prop"></span></span></p>
+                        <p><span data-i18n="dashboard.passives"></span>: <span id="dash-passives" class="stat"></span> <span class="info-icon">i<span class="tooltip" data-i18n="tooltips.passives"></span></span></p>
+                        <p><span data-i18n="dashboard.subordinates"></span>: <span id="dash-sub" class="stat"></span> <span class="info-icon">i<span class="tooltip" data-i18n="tooltips.subordinates"></span></span></p>
+                        <p><span data-i18n="dashboard.conditionals"></span>: <span id="dash-cond" class="stat"></span> <span class="info-icon">i<span class="tooltip" data-i18n="tooltips.conditionals"></span></span></p>
+                        <p>TTR: <span id="dash-ttr" class="stat"></span> <span class="info-icon">i<span class="tooltip" data-i18n="tooltips.ttr"></span></span> | MTLD: <span id="dash-mtld" class="stat"></span> <span class="info-icon">i<span class="tooltip" data-i18n="tooltips.mtld"></span></span></p>
                     </div>
                     <div>
                         <div class="tier-title">
-                            <span class="en-text">2B. CEFR Level Distribution</span><span class="pl-text">2B. Rozkład Poziomów CEFR</span>
-                            <span class="info-icon">i<span class="tooltip">
-                                <span class="en-text">A bar chart with two axes - the left (blue) one represents the amount of total words tagged at a certain CEFR level (done with the python library cefrpy), and the right (orange) one represents the amount of unique words tagged at a certain CEFR level. Shows that the easiest (A1) words appear A LOT, but aren't as diverse, whereas the hardest (C2) words appear way less often, but they're more diverse (more unique words compared to total words).</span>
-                                <span class="pl-text">Wykres słupkowy z dwiema osiami - lewa (niebieska) to całkowita liczba słów oznaczonych danym poziomem CEFR, a prawa (pomarańczowa) to liczba unikalnych słów na danym poziomie. Pokazuje to, że najłatwiejsze (A1) słowa pojawiają się BARDZO CZĘSTO, ale są mniej różnorodne, podczas gdy te najtrudniejsze (C2) pojawiają się rzadziej, ale cechują się wyższą różnorodnością.</span>
-                            </span></span>
+                            <span data-i18n="dashboard.tier2b_title"></span>
+                            <span class="info-icon">i<span class="tooltip" data-i18n="dashboard.tier2b_desc"></span></span>
                         </div>
                         <canvas id="distChart" height="150"></canvas>
                     </div>
@@ -228,30 +145,24 @@
                 <div class="tier-3 grid-3">
                     <div>
                         <div class="tier-title">
-                            <span class="en-text">3A. Thresholds</span><span class="pl-text">3A. Progi (Thresholds)</span>
-                            <span class="info-icon">i<span class="tooltip">
-                                <span class="en-text">According to Laufer, Batia (1989), 95% comprehension is necessary to understand the text you're reading. According to Hu, Marcella & Nation, Paul. (2000), 98% comprehension is necessary to acquire. It's possible these numbers are lower for video games (they're an interactive medium with audio and visuals, not just a book), but I added these metrics here anyways. They're basically saying at what linguistic level you have to be to comfortably understand and/or acquire vocabulary from a given game.</span>
-                                <span class="pl-text">Według Laufer, Batia (1989), do zrozumienia czytanego tekstu potrzebne jest 95% zrozumienia słów. Według Hu, Marcella i Nation, Paul (2000), do ich przyswojenia potrzeba 98%. Możliwe, że te wartości są niższe w grach wideo, ale dodałem je tutaj tak czy siak. Mówią one w uproszczeniu, na jakim poziomie musisz być, żeby komfortowo rozumieć grę i przyswajać słownictwo.</span>
-                            </span></span>
+                            <span data-i18n="dashboard.tier3a_title"></span>
+                            <span class="info-icon">i<span class="tooltip" data-i18n="dashboard.tier3a_desc"></span></span>
                         </div>
-                        <p>Total 95%: <strong id="dash-t95"></strong></p>
-                        <p>Total 98%: <strong id="dash-t98"></strong></p>
-                        <p>Unique 95%: <strong id="dash-u95"></strong></p>
-                        <p>Unique 98%: <strong id="dash-u98"></strong></p>
+                        <p>Total 95%: <strong id="dash-t95"></strong> <span class="info-icon">i<span class="tooltip" data-i18n="tooltips.t95"></span></span></p>
+                        <p>Total 98%: <strong id="dash-t98"></strong> <span class="info-icon">i<span class="tooltip" data-i18n="tooltips.t98"></span></span></p>
+                        <p>Unique 95%: <strong id="dash-u95"></strong> <span class="info-icon">i<span class="tooltip" data-i18n="tooltips.u95"></span></span></p>
+                        <p>Unique 98%: <strong id="dash-u98"></strong> <span class="info-icon">i<span class="tooltip" data-i18n="tooltips.u98"></span></span></p>
                     </div>
                     <div>
                         <div class="tier-title">
-                            <span class="en-text">3B. CEFR Sentences</span><span class="pl-text">3B. Zdania CEFR</span>
-                            <span class="info-icon">i<span class="tooltip">
-                                <span class="en-text">I used https://huggingface.co/dksysd/cefr-classifier (an AI sentence classifier model) to classify every sentence in a game's transcription according to what CEFR level this model thinks it is.</span>
-                                <span class="pl-text">Użyłem modelu AI https://huggingface.co/dksysd/cefr-classifier, aby sklasyfikować każde zdanie w transkrypcji gry i przypisać mu szacowany poziom CEFR.</span>
-                            </span></span>
+                            <span data-i18n="dashboard.tier3b_title"></span>
+                            <span class="info-icon">i<span class="tooltip" data-i18n="dashboard.tier3b_desc"></span></span>
                         </div>
                         <table class="cefr-table">
                             <thead>
                                 <tr>
-                                    <th><span class="en-text">Level</span><span class="pl-text">Poziom</span></th>
-                                    <th><span class="en-text">Count</span><span class="pl-text">Liczba</span></th>
+                                    <th data-i18n="dashboard.level"></th>
+                                    <th data-i18n="dashboard.count"></th>
                                     <th>%</th>
                                 </tr>
                             </thead>
@@ -260,76 +171,52 @@
                     </div>
                     <div>
                         <div class="tier-title">
-                            <span class="en-text">3C. Readability (L1)</span><span class="pl-text">3C. Czytelność (L1)</span>
-                            <span class="info-icon">i<span class="tooltip">
-                                <span class="en-text">Various readability metrics for the game's text. Not all that important for second language learners - more important for people who natively speak English - they're all described in the methodology section below.</span>
-                                <span class="pl-text">Różne wskaźniki czytelności tekstu w grze. Nie są aż tak istotne dla osób uczących się języka obcego, ważniejsze dla native speakerów. Wszystkie opisano w metodologii poniżej.</span>
-                            </span></span>
+                            <span data-i18n="dashboard.tier3c_title"></span>
+                            <span class="info-icon">i<span class="tooltip" data-i18n="dashboard.tier3c_desc"></span></span>
                         </div>
-                        <p>Flesch Reading Ease: <span id="dash-fre" class="stat"></span></p>
-                        <p>Flesch-Kincaid Grade: <span id="dash-fkg" class="stat"></span></p>
-                        <p>SMOG Index: <span id="dash-smog" class="stat"></span></p>
-                        <p>Dale-Chall: <span id="dash-dale" class="stat"></span></p>
+                        <p>Flesch Reading Ease: <span id="dash-fre" class="stat"></span> <span class="info-icon">i<span class="tooltip" data-i18n="tooltips.fre"></span></span></p>
+                        <p>Flesch-Kincaid Grade: <span id="dash-fkg" class="stat"></span> <span class="info-icon">i<span class="tooltip" data-i18n="tooltips.fkg"></span></span></p>
+                        <p>SMOG Index: <span id="dash-smog" class="stat"></span> <span class="info-icon">i<span class="tooltip" data-i18n="tooltips.smog"></span></span></p>
+                        <p>Dale-Chall: <span id="dash-dale" class="stat"></span> <span class="info-icon">i<span class="tooltip" data-i18n="tooltips.dale"></span></span></p>
                     </div>
                 </div>
 
                 <div class="tier-4 grid-2">
                     <div>
                         <div class="tier-title">
-                            <span class="en-text">4A. Top Counts</span><span class="pl-text">4A. Najczęstsze Formy</span>
-                            <span class="info-icon">i<span class="tooltip">
-                                <span class="en-text">Shows the most-often-appearing lemmas, bigrams, phrasal verbs, verb-preposition combos and adjective-noun combos. A lemma is a base form of a word (running -> run), a bigram is a combination of 2 words (I am; I'm, etc), a phrasal verb means something other than it would mean literally ("give up" means to stop trying and not give something to someone who's higher up than you). Verb-preposition combos are things like "look at", "return to", and adjective-noun combos are things like "fast dog", "iron sword"</span>
-                                <span class="pl-text">Pokazuje najczęściej pojawiające się lematy, bigramy, czasowniki złożone, kombinacje czasownik-przyimek oraz przymiotnik-rzeczownik. Lemat to forma podstawowa słowa (running -> run). Bigram to połączenie 2 słów. Czasownik złożony ma inne znaczenie niż to dosłowne. Kombinacje czasownik-przyimek to np. "look at", a przymiotnik-rzeczownik to np. "fast dog".</span>
-                            </span></span>
+                            <span data-i18n="dashboard.tier4a_title"></span>
+                            <span class="info-icon">i<span class="tooltip" data-i18n="dashboard.tier4a_desc"></span></span>
                         </div>
-                        <p><strong><span class="en-text">Top Lemmas:</span><span class="pl-text">Lematy:</span></strong> <span id="dash-lemmas"></span></p>
-                        <p><strong><span class="en-text">Top Bigrams:</span><span class="pl-text">Bigramy:</span></strong> <span id="dash-bigrams"></span></p>
-                        <p><strong><span class="en-text">Verb-Preposition:</span><span class="pl-text">Czasownik-Przyimek:</span></strong> <span id="dash-verb-prep"></span></p>
-                        <p><strong><span class="en-text">Adjective-Noun:</span><span class="pl-text">Przymiotnik-Rzecz:</span></strong> <span id="dash-adj-noun"></span></p>
-                        <p><strong><span class="en-text">Phrasal Verbs:</span><span class="pl-text">Czasowniki Złożone:</span></strong> <span id="dash-top-pv"></span></p>
+                        <p><strong data-i18n="dashboard.top_lemmas"></strong>: <span id="dash-lemmas"></span> <span class="info-icon">i<span class="tooltip" data-i18n="tooltips.top_lemmas"></span></span></p>
+                        <p><strong data-i18n="dashboard.top_bigrams"></strong>: <span id="dash-bigrams"></span> <span class="info-icon">i<span class="tooltip" data-i18n="tooltips.top_bigrams"></span></span></p>
+                        <p><strong data-i18n="dashboard.verb_prep"></strong>: <span id="dash-verb-prep"></span> <span class="info-icon">i<span class="tooltip" data-i18n="tooltips.verb_prep"></span></span></p>
+                        <p><strong data-i18n="dashboard.adj_noun"></strong>: <span id="dash-adj-noun"></span> <span class="info-icon">i<span class="tooltip" data-i18n="tooltips.adj_noun"></span></span></p>
+                        <p><strong data-i18n="dashboard.phrasal_verbs"></strong>: <span id="dash-top-pv"></span> <span class="info-icon">i<span class="tooltip" data-i18n="tooltips.phrasal_verbs"></span></span></p>
                     </div>
                     <div>
                         <div class="tier-title">
-                            <span class="en-text">4B. OOV & Outliers</span><span class="pl-text">4B. OOV (Poza Słownikiem)</span>
-                            <span class="info-icon">i<span class="tooltip">
-                                <span class="en-text">Out of vocabulary words are essentially words that appeared in the game, but did not appear in the english dictionary I used. "Top 10 OOV words" is just that, whereas the full OOV list also ignored all the character names and other useless filler, actually including only words that were truly "weird".</span>
-                                <span class="pl-text">Słowa spoza słownika (OOV) to w uproszczeniu takie, które pojawiły się w grze, ale nie było ich w słowniku angielskim, którego użyłem. Lista "Top 10 OOV" mówi sama za siebie, podczas gdy "Pełna Lista OOV" ignoruje imiona postaci i inne wypełniacze, pokazując jedynie faktycznie "dziwne" słowa.</span>
-                            </span></span>
+                            <span data-i18n="dashboard.tier4b_title"></span>
+                            <span class="info-icon">i<span class="tooltip" data-i18n="dashboard.tier4b_desc"></span></span>
                         </div>
-                        <p><span class="en-text">OOV Rate:</span><span class="pl-text">Wskaźnik OOV:</span> <span id="dash-oov" class="stat"></span>%</p>
-                        <p><strong><span class="en-text">Top 10 OOV:</span><span class="pl-text">Top 10 OOV:</span></strong> <span id="dash-top-oov"></span></p>
-                        <button class="toggle-btn" onclick="document.getElementById('true-oov').classList.toggle('active')">
-                            <span class="en-text">Toggle Full OOV List</span><span class="pl-text">Przełącz Pełną Listę OOV</span>
-                        </button>
+                        <p><span data-i18n="dashboard.oov_rate"></span>: <span id="dash-oov" class="stat"></span>% <span class="info-icon">i<span class="tooltip" data-i18n="tooltips.oov_rate"></span></span></p>
+                        <p><strong data-i18n="dashboard.top_10_oov"></strong>: <span id="dash-top-oov"></span> <span class="info-icon">i<span class="tooltip" data-i18n="tooltips.top_oov"></span></span></p>
+                        <button class="toggle-btn" onclick="document.getElementById('true-oov').classList.toggle('active')" data-i18n="dashboard.toggle_oov"></button>
                         <div id="true-oov" class="hidden-section"></div>
                     </div>
                 </div>
 
-                <div class="tier-total-stats" style="margin-top: 30px; padding: 20px; background: var(--container-bg); border: 1px solid var(--border-color); border-radius: 5px;">
-                    <h2 style="margin-top: 0;">
-                        <span class="en-text">Global Corpus Stats</span><span class="pl-text">Statystyki Globalne Korpusu</span>
-                    </h2>
-                    <p><strong><span class="en-text">Total Games Analyzed:</span><span class="pl-text">Suma Przeanalizowanych Gier:</span></strong> 56</p>
-                    <p><strong><span class="en-text">Total Lines Extracted:</span><span class="pl-text">Suma Wyekstrahowanych Linii:</span></strong> <span id="global-lines">N/A</span></p>
-                    <p><strong><span class="en-text">Total Sentences:</span><span class="pl-text">Suma Zdań:</span></strong> <span id="global-sentences">N/A</span></p>
-                    <p><strong><span class="en-text">Total Words Analyzed:</span><span class="pl-text">Suma Przeanalizowanych Słów:</span></strong> <span id="global-words">N/A</span></p>
+                <div class="global-summary-strip" style="margin-top: 30px; padding: 15px; background: var(--container-bg); border: 1px solid var(--border-color); border-radius: 5px; text-align: center;">
+                    <span data-i18n="dashboard.global_summary"></span>
                 </div>
 
                 <section id="dash-writeup">
-                    <h2>
-                        <span class="en-text">Methodology & Notes</span><span class="pl-text">Metodologia i Notatki</span>
-                    </h2>
-                    <p class="en-text">All video game cover art, titles, and associated imagery are the property of their respective publishers and developers. They are used here strictly for non-commercial, academic, and analytical purposes under the right of quotation/fair use.</p>
-                    <p class="pl-text">Wszystkie okładki gier wideo, tytuły i powiązane z nimi obrazy są własnością ich wydawców i deweloperów. Są one wykorzystywane w tym miejscu wyłącznie do celów niekomercyjnych, akademickich i analitycznych na mocy prawa cytatu/dozwolonego użytku.</p>
+                    <h2 data-i18n="dashboard.methodology_title"></h2>
+                    <p data-i18n="dashboard.methodology_desc"></p>
                 </section>
             </div>
         </main>
-
-        <footer>
-            <small>2026 𖹭   |   discord @kamrl</small>
-        </footer>
+        <footer><small>2026 𖹭   |   discord @kamrl</small></footer>
     </div>
-    
     <script src="main.js"></script>
 </body>
 </html>

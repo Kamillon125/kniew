@@ -1,3 +1,18 @@
+let currentLang = 'en';
+
+function applyTranslations() {
+    document.querySelectorAll('[data-i18n]').forEach(element => {
+        const keys = element.getAttribute('data-i18n').split('.');
+        let text = siteContent[currentLang];
+        keys.forEach(k => { if(text) text = text[k]; });
+        if(text) element.innerHTML = text; 
+    });
+    document.documentElement.lang = currentLang;
+}
+
+// Initial translation load
+document.addEventListener("DOMContentLoaded", applyTranslations);
+
 (function() {
     if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
         document.body.classList.add("dark-mode");
@@ -11,14 +26,8 @@ function playName() {
 }
 
 function toggleLanguage() {
-    const body = document.body;
-    if (body.classList.contains('lang-en-active')) {
-        body.classList.remove('lang-en-active');
-        body.classList.add('lang-pl-active');
-    } else {
-        body.classList.remove('lang-pl-active');
-        body.classList.add('lang-en-active');
-    }
+    currentLang = currentLang === 'en' ? 'pl' : 'en';
+    applyTranslations();
 }
 
 function toggleTheme() {
