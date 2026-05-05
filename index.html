@@ -41,9 +41,9 @@
             <div id="home-tab" class="tab-content active">
                 <section id="about">
                     <h2 data-i18n="about.title"></h2>
-                    <div class="bio-content"><p data-i18n="about.p1"></p></div>
+                    <div class="bio-content"><p data-i18n="about.p1_short"></p></div> <!-- about.p1_short instead of about.p1, which was here - changed for conference.-->
                 </section>
-                <section id="computer-stuff">
+                <!--section id="computer-stuff">
                     <h2 data-i18n="computer.title"></h2>
                     <div class="computer"><p data-i18n="computer.p1"></p></div>
                 </section>
@@ -54,13 +54,14 @@
                 <section id="music">
                     <h2 data-i18n="music.title"></h2>
                     <div class="music"><p data-i18n="music.p1"></p></div>
-                </section>
+                </section--> <!--This was hidden for the conference to make the dashboard demo look more serious.-->
             </div>
 
             <div id="dashboard-tab" class="tab-content">
                 <div class="searchable-dropdown">
-                    <input type="text" id="game-search" class="search-input" placeholder="Search for a game..." autocomplete="off">
+                    <input type="text" id="game-search" class="search-input" placeholder="Search for a game..." autocomplete="off" data-i18n="dashboard.search_game">
                     <div id="dropdown-list" class="dropdown-list"></div>
+                    <p id="corpus-median-warning" style="display: none; color: var(--accent-color); font-size: 0.9rem; margin-top: 8px; text-align: center; font-style: italic;" data-i18n="dashboard.median_warning"></p>
                 </div>
 
                 <div class="dash-meta">
@@ -95,24 +96,24 @@
 
                     <div class="word-list-container">
                         <div class="word-list">
-                            <strong data-i18n="dashboard.learned_b2"></strong>:
-                            <div style="font-size: 0.85rem; color: var(--accent-color); margin-top: 2px; margin-bottom: 5px;">
-                                <strong>B2 Acquisitional Index:</strong> <span id="b2-ni" class="stat"></span> <span class="info-icon">i<span class="tooltip" data-i18n="tooltips.acq_index"></span></span>
+                            <div style="font-size: 0.85rem; color: var(--accent-color); margin-bottom: 8px;">
+                                <strong data-i18n="dashboard.b2_acq_index"></strong>: <span id="b2-ni" class="stat"></span> <span class="info-icon">i<span class="tooltip" data-i18n="tooltips.acq_index"></span></span>
                             </div>
+                            <strong data-i18n="dashboard.learned_b2"></strong>:
                             <div id="b2-words" class="scrollable-list"></div>
                         </div>
                         <div class="word-list">
-                            <strong data-i18n="dashboard.learned_c1"></strong>:
-                            <div style="font-size: 0.85rem; color: var(--accent-color); margin-top: 2px; margin-bottom: 5px;">
-                                <strong>C1 Acquisitional Index:</strong> <span id="c1-ni" class="stat"></span> <span class="info-icon">i<span class="tooltip" data-i18n="tooltips.acq_index"></span></span>
+                            <div style="font-size: 0.85rem; color: var(--accent-color); margin-bottom: 8px;">
+                                <strong data-i18n="dashboard.c1_acq_index"></strong>: <span id="c1-ni" class="stat"></span> <span class="info-icon">i<span class="tooltip" data-i18n="tooltips.acq_index"></span></span>
                             </div>
+                            <strong data-i18n="dashboard.learned_c1"></strong>:
                             <div id="c1-words" class="scrollable-list"></div>
                         </div>
                         <div class="word-list">
-                            <strong data-i18n="dashboard.learned_c2"></strong>:
-                            <div style="font-size: 0.85rem; color: var(--accent-color); margin-top: 2px; margin-bottom: 5px;">
-                                <strong>C2 Acquisitional Index:</strong> <span id="c2-ni" class="stat"></span> <span class="info-icon">i<span class="tooltip" data-i18n="tooltips.acq_index"></span></span>
+                            <div style="font-size: 0.85rem; color: var(--accent-color); margin-bottom: 8px;">
+                                <strong data-i18n="dashboard.c2_acq_index"></strong>: <span id="c2-ni" class="stat"></span> <span class="info-icon">i<span class="tooltip" data-i18n="tooltips.acq_index"></span></span>
                             </div>
+                            <strong data-i18n="dashboard.learned_c2"></strong>:
                             <div id="c2-words" class="scrollable-list"></div>
                         </div>
                     </div>
@@ -148,10 +149,10 @@
                             <span data-i18n="dashboard.tier3a_title"></span>
                             <span class="info-icon">i<span class="tooltip" data-i18n="dashboard.tier3a_desc"></span></span>
                         </div>
-                        <p>Total 95%: <strong id="dash-t95"></strong> <span class="info-icon">i<span class="tooltip" data-i18n="tooltips.t95"></span></span></p>
-                        <p>Total 98%: <strong id="dash-t98"></strong> <span class="info-icon">i<span class="tooltip" data-i18n="tooltips.t98"></span></span></p>
-                        <p>Unique 95%: <strong id="dash-u95"></strong> <span class="info-icon">i<span class="tooltip" data-i18n="tooltips.u95"></span></span></p>
-                        <p>Unique 98%: <strong id="dash-u98"></strong> <span class="info-icon">i<span class="tooltip" data-i18n="tooltips.u98"></span></span></p>
+                        <p><span data-i18n="dashboard.t95_label"></span>: <strong id="dash-t95"></strong> <span class="info-icon">i<span class="tooltip" data-i18n="tooltips.t95"></span></span></p>
+                        <p><span data-i18n="dashboard.t98_label"></span>: <strong id="dash-t98"></strong> <span class="info-icon">i<span class="tooltip" data-i18n="tooltips.t98"></span></span></p>
+                        <p><span data-i18n="dashboard.u95_label"></span>: <strong id="dash-u95"></strong> <span class="info-icon">i<span class="tooltip" data-i18n="tooltips.u95"></span></span></p>
+                        <p><span data-i18n="dashboard.u98_label"></span>: <strong id="dash-u98"></strong> <span class="info-icon">i<span class="tooltip" data-i18n="tooltips.u98"></span></span></p>
                     </div>
                     <div>
                         <div class="tier-title">
@@ -205,6 +206,37 @@
                     </div>
                 </div>
 
+                <!-- Compare Block -->
+                <div class="compare-container" style="margin-top: 30px; border-top: 2px solid var(--border-color); padding-top: 20px;">
+                    <h2 data-i18n="dashboard.compare_title">Compare Games</h2>
+                    
+                    <div class="compare-dropdowns" style="display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 20px;">
+                        <div class="searchable-dropdown" style="flex: 1; min-width: 250px;">
+                            <input type="text" id="game-search-compare-1" class="search-input" placeholder="Select Game 1..." autocomplete="off" data-i18n="dashboard.select_game_1">
+                            <div id="dropdown-list-compare-1" class="dropdown-list"></div>
+                        </div>
+                        <div class="searchable-dropdown" style="flex: 1; min-width: 250px;">
+                            <input type="text" id="game-search-compare-2" class="search-input" placeholder="Select Game 2..." autocomplete="off" data-i18n="dashboard.select_game_2">
+                            <div id="dropdown-list-compare-2" class="dropdown-list"></div>
+                        </div>
+                    </div>
+                    
+                    <table class="cefr-table compare-table" id="compare-table" style="display:none; width: 100%;">
+                        <thead>
+                            <tr>
+                                <th data-i18n="dashboard.metric">Metric</th>
+                                <th id="comp-header-1" style="width: 35%;">Game 1</th>
+                                <th id="comp-header-2" style="width: 35%;">Game 2</th>
+                            </tr>
+                        </thead>
+                        <tbody id="comp-tbody">
+                            <!-- Rows injected via JS -->
+                        </tbody>
+                    </table>
+                    <!-- Added Disclaimer -->
+                    <p id="compare-disclaimer" data-i18n="dashboard.compare_disclaimer" style="font-size: 0.85rem; color: var(--subtle-text); text-align: center; margin-top: 10px; display: none;"></p>
+                </div>
+
                 <div class="global-summary-strip" style="margin-top: 30px; padding: 15px; background: var(--container-bg); border: 1px solid var(--border-color); border-radius: 5px; text-align: center;">
                     <span data-i18n="dashboard.global_summary"></span>
                 </div>
@@ -215,7 +247,7 @@
                 </section>
             </div>
         </main>
-        <footer><small>2026 𖹭   |   discord @kamrl</small></footer>
+        <footer><small>2026 ♥   |   discord @kamrl</small></footer>
     </div>
     <script src="main.js"></script>
 </body>

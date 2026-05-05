@@ -84,7 +84,7 @@ body.lang-pl-active .en-text { display: none; }
 button.is-playing .music-label-on { display: none; }
 button.is-playing .music-label-off { display: inline; }
 
-.tab-nav { margin-bottom: 20px; border-bottom: 1px solid var(--border-color); display: flex; gap: 10px; }
+.tab-nav { margin-bottom: 20px; border-bottom: 1px solid var(--border-color); display: flex; gap: 10px; flex-wrap: wrap; }
 .tab-btn { padding: 10px 20px; border: none; border-bottom: 3px solid transparent; background: none; font-weight: bold; font-size: 1.1rem; }
 .tab-btn.active { border-bottom: 3px solid var(--accent-color); color: var(--accent-color); }
 .tab-content { display: none; }
@@ -129,3 +129,9 @@ button.is-playing .music-label-off { display: inline; }
 .hidden-section { display: none; margin-top: 10px; background: var(--bg-color); padding: 10px; max-height: 200px; overflow-y: auto; font-family: monospace; font-size: 0.85rem;}
 .hidden-section.active { display: block; }
 .toggle-btn { margin-top: 10px; font-size: 0.8rem; }
+
+/* Compare Table Formatting */
+.compare-table { border: 1px solid var(--border-color); margin-top: 10px; }
+.compare-table th { background: var(--bg-color); border: 1px solid var(--border-color); text-align: center; }
+.compare-table td { border: 1px solid var(--border-color); text-align: center; }
+.compare-table td:first-child { text-align: left; background: var(--bg-color); }
