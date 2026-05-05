@@ -135,3 +135,8 @@ button.is-playing .music-label-off { display: inline; }
 .compare-table th { background: var(--bg-color); border: 1px solid var(--border-color); text-align: center; }
 .compare-table td { border: 1px solid var(--border-color); text-align: center; }
 .compare-table td:first-child { text-align: left; background: var(--bg-color); }
+
+/* Fix for Chart.js overflowing CSS Grid containers on mobile */
+.grid-2 > div, .grid-3 > div {
+    min-width: 0;
+}
