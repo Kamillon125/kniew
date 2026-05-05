@@ -17,7 +17,11 @@ function applyTranslations() {
 }
 
 // Initial translation load
-document.addEventListener("DOMContentLoaded", applyTranslations);
+// Initial setup
+document.addEventListener("DOMContentLoaded", () => {
+    applyTranslations();
+    updateChartColors();
+});
 
 (function() {
     if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
@@ -38,6 +42,44 @@ function toggleLanguage() {
 
 function toggleTheme() {
     document.body.classList.toggle("dark-mode");
+    updateChartColors();
+}
+
+function updateChartColors() {
+    if (typeof Chart === 'undefined') return;
+    
+    // Grab the current CSS variable colors from the body
+    const textColor = getComputedStyle(document.body).getPropertyValue('--text-color').trim();
+    const borderColor = getComputedStyle(document.body).getPropertyValue('--border-color').trim();
+    
+    // 1. Update global defaults for future charts
+    Chart.defaults.color = textColor;
+    Chart.defaults.borderColor = borderColor;
+
+    // 2. Define a helper to force-update existing chart instances
+    const refreshChart = (inst) => {
+        if (!inst) return;
+
+        // Force axis (tick) and grid line colors
+        if (inst.options.scales) {
+            Object.values(inst.options.scales).forEach(scale => {
+                if (scale.ticks) scale.ticks.color = textColor;
+                if (scale.grid) scale.grid.color = borderColor;
+            });
+        }
+
+        // Force legend text colors
+        if (inst.options.plugins && inst.options.plugins.legend && inst.options.plugins.legend.labels) {
+            inst.options.plugins.legend.labels.color = textColor;
+        }
+
+        inst.update(); // Redraw the chart with new settings
+    };
+
+    // 3. Apply the refresh to all your specific chart instances
+    refreshChart(uniqueChartInst);
+    refreshChart(learnedChartInst);
+    refreshChart(distChartInst);
 }
 
 function toggleMusic() {
