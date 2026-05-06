@@ -33,6 +33,11 @@ body {
     transition: background-color 0.3s, color 0.3s;
 }
 
+/* Force ANY long string of text in paragraphs or lists to break if needed */
+p, li {
+    overflow-wrap: break-word;
+}
+
 .container {
     max-width: var(--content-width);
     margin: 0 auto;
