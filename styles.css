@@ -65,14 +65,20 @@ button {
 }
 
 button:hover {
-    background-color: var(--accent-color);
-    color: var(--container-bg);
+    background-color: color-mix(in srgb, var(--accent-color) 20%, transparent);
+    color: var(--text-color);
     border-color: var(--accent-color);
 }
 
 .audio-btn { border-radius: 50%; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; padding: 0; }
 #music-attribution { font-size: 0.85rem; color: var(--subtle-text); font-style: italic; margin-top: 5px; display: none; }
-a { color: var(--accent-color); text-decoration: none; }
+
+a { 
+    color: var(--accent-color); 
+    text-decoration: none; 
+    overflow-wrap: break-word; 
+}
+
 a:hover { text-decoration: underline; }
 section { margin-bottom: 40px; }
 h2 { border-bottom: 1px solid var(--border-color); padding-bottom: 10px; margin-top: 0; }
@@ -86,7 +92,7 @@ button.is-playing .music-label-off { display: inline; }
 
 .tab-nav { margin-bottom: 20px; border-bottom: 1px solid var(--border-color); display: flex; gap: 10px; flex-wrap: wrap; }
 .tab-btn { padding: 10px 20px; border: none; border-bottom: 3px solid transparent; background: none; font-weight: bold; font-size: 1.1rem; }
-.tab-btn.active { border-bottom: 3px solid var(--accent-color); color: var(--accent-color); }
+.tab-btn.active { border-bottom: 3px solid var(--accent-color); color: var(--text-color); background-color: color-mix(in srgb, var(--accent-color) 20%, transparent); }
 .tab-content { display: none; }
 .tab-content.active { display: block; }
 
@@ -139,4 +145,12 @@ button.is-playing .music-label-off { display: inline; }
 /* Fix for Chart.js overflowing CSS Grid containers on mobile */
 .grid-2 > div, .grid-3 > div {
     min-width: 0;
+    position: relative;
+    max-width: 100%;
+}
+
+/* Fix for Chart.js infinite resize loop and right-side clipping */
+canvas {
+    max-height: 250px !important;
+    max-width: 100% !important;
 }

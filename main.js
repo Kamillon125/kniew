@@ -16,8 +16,6 @@ function applyTranslations() {
     document.documentElement.lang = currentLang;
 }
 
-// Initial translation load
-// Initial setup
 document.addEventListener("DOMContentLoaded", () => {
     applyTranslations();
     updateChartColors();
@@ -48,19 +46,15 @@ function toggleTheme() {
 function updateChartColors() {
     if (typeof Chart === 'undefined') return;
     
-    // Grab the current CSS variable colors from the body
     const textColor = getComputedStyle(document.body).getPropertyValue('--text-color').trim();
     const borderColor = getComputedStyle(document.body).getPropertyValue('--border-color').trim();
     
-    // 1. Update global defaults for future charts
     Chart.defaults.color = textColor;
     Chart.defaults.borderColor = borderColor;
 
-    // 2. Define a helper to force-update existing chart instances
     const refreshChart = (inst) => {
         if (!inst) return;
 
-        // Force axis (tick) and grid line colors
         if (inst.options.scales) {
             Object.values(inst.options.scales).forEach(scale => {
                 if (scale.ticks) scale.ticks.color = textColor;
@@ -68,15 +62,13 @@ function updateChartColors() {
             });
         }
 
-        // Force legend text colors
         if (inst.options.plugins && inst.options.plugins.legend && inst.options.plugins.legend.labels) {
             inst.options.plugins.legend.labels.color = textColor;
         }
 
-        inst.update(); // Redraw the chart with new settings
+        inst.update(); 
     };
 
-    // 3. Apply the refresh to all your specific chart instances
     refreshChart(uniqueChartInst);
     refreshChart(learnedChartInst);
     refreshChart(distChartInst);
@@ -104,13 +96,11 @@ let distChartInst = null;
 let activeGameId = null;
 let dashboardInitialized = false;
 
-// State tracking for compare dropdowns
 let activeComp1 = null;
 let activeComp2 = null;
 
 const gMetrics = typeof globalMetrics !== 'undefined' ? globalMetrics.corpus_global_metrics : null;
 
-// Helper to format text/HTML numbers with commas and max 3 decimals
 function formatNum(val) {
     if (typeof val === 'number') {
         if (Number.isInteger(val)) {
@@ -121,7 +111,6 @@ function formatNum(val) {
     return val;
 }
 
-// NEW: Helper strictly for Chart.js data arrays (never returns strings)
 function roundChartNum(val) {
     return typeof val === 'number' ? Number(val.toFixed(3)) : 0;
 }
@@ -216,17 +205,14 @@ function setupCompareDropdown(inputId, listId, isFirstGame) {
 }
 
 document.addEventListener('click', (e) => {
-    // Hide main search list
     const mainSearch = document.getElementById('game-search');
     if(mainSearch && !mainSearch.parentElement.contains(e.target)) {
         document.getElementById('dropdown-list').classList.remove('active');
     }
-    // Hide compare list 1
     const compSearch1 = document.getElementById('game-search-compare-1');
     if(compSearch1 && !compSearch1.parentElement.contains(e.target)) {
         document.getElementById('dropdown-list-compare-1').classList.remove('active');
     }
-    // Hide compare list 2
     const compSearch2 = document.getElementById('game-search-compare-2');
     if(compSearch2 && !compSearch2.parentElement.contains(e.target)) {
         document.getElementById('dropdown-list-compare-2').classList.remove('active');
@@ -473,6 +459,7 @@ function renderCharts(vocab) {
         },
         options: { 
             responsive: true, 
+            maintainAspectRatio: false,
             plugins: { 
                 tooltip: { 
                     mode: 'index', 
@@ -502,6 +489,7 @@ function renderCharts(vocab) {
         },
         options: {
             responsive: true,
+            maintainAspectRatio: false,
             plugins: {
                 tooltip: {
                     mode: 'index', intersect: false,
@@ -548,6 +536,7 @@ function renderCharts(vocab) {
         },
         options: {
             responsive: true,
+            maintainAspectRatio: false,
             plugins: {
                 tooltip: {
                     callbacks: {
