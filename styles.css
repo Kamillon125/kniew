@@ -1,3 +1,8 @@
+/* Ensure padding doesn't inflate element widths */
+* {
+    box-sizing: border-box;
+}
+
 :root {
     --bg-color: #eaf0f6; 
     --container-bg: #ffffff;
@@ -116,7 +121,6 @@ button.is-playing .music-label-off { display: inline; }
 
 .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
 .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
-@media (max-width: 700px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } }
 
 .stat { border-bottom: 2px dotted var(--accent-color); cursor: help; position: relative; font-weight: bold; }
 .tooltip { visibility: hidden; width: max-content; max-width: 250px; background-color: var(--text-color); color: var(--container-bg); text-align: left; padding: 5px 10px; border-radius: 4px; position: absolute; z-index: 10; bottom: 125%; left: 50%; transform: translateX(-50%); opacity: 0; transition: opacity 0.2s; font-size: 0.85rem; font-weight: normal; font-family: sans-serif; pointer-events: none; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
@@ -142,15 +146,39 @@ button.is-playing .music-label-off { display: inline; }
 .compare-table td { border: 1px solid var(--border-color); text-align: center; }
 .compare-table td:first-child { text-align: left; background: var(--bg-color); }
 
-/* Fix for Chart.js overflowing CSS Grid containers on mobile */
+/* Fix for Chart.js container logic */
 .grid-2 > div, .grid-3 > div {
     min-width: 0;
     position: relative;
-    max-width: 100%;
+    width: 100%;
 }
 
-/* Fix for Chart.js infinite resize loop and right-side clipping */
 canvas {
+    display: block;
     max-height: 250px !important;
+    width: 100% !important;
     max-width: 100% !important;
+}
+
+/* Mobile Optimizations to fix screen bleeding */
+@media (max-width: 700px) { 
+    .grid-2, .grid-3 { 
+        grid-template-columns: 1fr; 
+        gap: 15px;
+    } 
+    body { 
+        padding: 10px; 
+    }
+    .container { 
+        padding: 15px; 
+    }
+    .tier-1, .tier-2, .tier-3, .tier-4 { 
+        padding: 10px; 
+    }
+    .dash-meta img {
+        width: 100%;
+        max-width: 300px;
+        margin: 0 auto;
+        display: block;
+    }
 }
